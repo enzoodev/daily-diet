@@ -1,8 +1,9 @@
+import { StatusBar } from 'react-native';
 import { ThemeProvider } from 'styled-components/native';
 import theme from './src/theme';
 import { useFonts, NunitoSans_400Regular, NunitoSans_700Bold } from '@expo-google-fonts/nunito-sans';
 
-import Home from '@screens/Home';
+import Routes from './src/routes';
 
 import Loading from '@components/Loading';
 
@@ -11,7 +12,12 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      { fontsLoaded ? <Home /> : <Loading /> }
+      <StatusBar
+        barStyle='dark-content'
+        backgroundColor='transparent'
+        translucent
+      />
+      { fontsLoaded ? <Routes /> : <Loading /> }
     </ThemeProvider>
   )
 }

@@ -1,17 +1,11 @@
-import styled, { css } from "styled-components/native";
+import styled from "styled-components/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const Container = styled.View`
+const Container = styled(SafeAreaView)`
     flex: 1;
     background-color: ${({ theme }) => theme.COLORS.BASE.GRAY_7};
-    align-items: center;
-    justify-content: center;
+    padding: 24px;
 `
 
-const Title = styled.Text`
-    ${({ theme }) => css`
-        font-family: ${theme.FONTS.FAMILY.BOLD};
-        font-size: ${theme.FONTS.SIZE.LG}px;
-    `}
-`
 
-export { Container, Title };
+export { Container };
