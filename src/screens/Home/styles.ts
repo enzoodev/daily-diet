@@ -7,5 +7,4 @@ const Container = styled(SafeAreaView)`
     padding: 24px;
 `
 
-
 export { Container };
