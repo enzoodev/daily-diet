@@ -10,7 +10,6 @@ const Container = styled.TouchableOpacity`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 50px;
 `
 
 const Title = styled.Text`
@@ -24,8 +23,7 @@ const Title = styled.Text`
 
 const Icon = styled(MaterialIcons).attrs(({ theme }) => ({
     size: 18,
-    color: theme.COLORS.BASE.WHITE,
-    weight: 'fill'
+    color: theme.COLORS.BASE.WHITE
 }))``;
 
 export { Container, Title, Icon };
