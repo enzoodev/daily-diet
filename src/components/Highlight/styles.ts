@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components/native";
-import { ArrowLeft, ArrowUpRight } from 'phosphor-react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 type HighlightTypeStyleProps = {
     type: 'PRIMARY' | 'SECONDARY';
@@ -36,22 +36,15 @@ const Subtitle = styled.Text`
     `};
 `
 
-const IconArrowLeft = styled(ArrowLeft).attrs<Props>(({ theme, type }) => ({
+const Icon = styled(MaterialCommunityIcons).attrs<Props>(({ theme, type }) => ({
     size: 24,
     color: type === 'PRIMARY' ? theme.COLORS.PRODUCT.GREEN_DARK : theme.COLORS.PRODUCT.RED_DARK
-}))`
+}))<Props>`
     position: absolute;
     top: 4px;
-    left: 4px;
-`;
+    ${({ screenWithHeader }) => screenWithHeader ?
+        css` right: 4px; ` : css` left: 4px; `
+    };
+`
 
-const IconArrowUpRight = styled(ArrowUpRight).attrs<Props>(({ theme, type }) => ({
-    size: 24,
-    color: type === 'PRIMARY' ? theme.COLORS.PRODUCT.GREEN_DARK : theme.COLORS.PRODUCT.RED_DARK
-}))`
-    position: absolute;
-    top: 4px;
-    right: 4px;
-`;
-
-export { HighlightTypeStyleProps, Container, Title, Subtitle, IconArrowLeft, IconArrowUpRight };
+export { HighlightTypeStyleProps, Container, Title, Subtitle, Icon };

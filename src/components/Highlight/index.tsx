@@ -4,16 +4,23 @@ type Props = S.HighlightTypeStyleProps & {
     title: number;
 }
 
-const Highlight = ({ title, type, screenWithHeader}: Props) => {
+const Highlight = ({ title, screenWithHeader, ...rest}: Props) => {
     return(
-        <S.Container type={type} screenWithHeader={screenWithHeader}>
+        <S.Container
+            screenWithHeader={screenWithHeader}
+            {...rest}
+        >
             <S.Title>
                 {title}
             </S.Title>
             <S.Subtitle>
                 das refeições dentro da dieta
             </S.Subtitle>
-            { screenWithHeader ? <S.IconArrowUpRight type={type} /> : <S.IconArrowLeft type={type} /> }
+            <S.Icon
+                name={screenWithHeader ? 'arrow-top-right' : 'arrow-left'}
+                {...rest}
+                screenWithHeader={screenWithHeader}
+            />
         </S.Container>
     )
 }

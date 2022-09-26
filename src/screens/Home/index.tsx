@@ -4,10 +4,6 @@ import Button from '@components/Button';
 import * as S from './styles';
 
 const Home = () => {
-    const handleAddNewMeal = () => {
-        console.log('test');
-    }
-
     return(
         <S.Container>
             <Header />
@@ -18,7 +14,7 @@ const Home = () => {
             />
             <Button
                 title='Nova refeição'
-                onPress={() => handleAddNewMeal}
+                icon='add'
             />
         </S.Container>
     )

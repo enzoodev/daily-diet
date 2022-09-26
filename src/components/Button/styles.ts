@@ -1,9 +1,5 @@
 import styled, { css } from "styled-components/native";
-import { PhosphorLogo } from 'phosphor-react-native'
-
-type IconTypeStyleProps = string;
-
-type Props = IconTypeStyleProps;
+import { MaterialIcons } from '@expo/vector-icons';
 
 const Container = styled.TouchableOpacity`
     width: 100%;
@@ -11,8 +7,10 @@ const Container = styled.TouchableOpacity`
     border-radius: 6px;
     margin-top: 50px;
     background-color: ${({ theme }) => theme.COLORS.BASE.GRAY_2};
+    flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 50px;
 `
 
 const Title = styled.Text`
@@ -21,11 +19,13 @@ const Title = styled.Text`
         font-size: ${theme.FONTS.SIZE.MD}px;
         color: ${theme.COLORS.BASE.WHITE};
     `};
+    margin-left: 6px;
 `
 
-const Icon = styled(PhosphorLogo).attrs(({ theme }) => ({
-    size: 32,
-    color: theme.COLORS.BASE.WHITE
+const Icon = styled(MaterialIcons).attrs(({ theme }) => ({
+    size: 18,
+    color: theme.COLORS.BASE.WHITE,
+    weight: 'fill'
 }))``;
 
 export { Container, Title, Icon };
