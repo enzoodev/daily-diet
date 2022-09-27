@@ -1,4 +1,5 @@
 export type MealTypeProps = {
     hours: string;
-    meal: string;   
+    meal: string;
+    isCorrect: boolean;
 };

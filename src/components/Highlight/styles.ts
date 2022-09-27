@@ -10,6 +10,7 @@ type Props = HighlightTypeStyleProps;
 
 const Container = styled.View<Props>`
     width: 100%;
+    margin: 20px 0;
     border-radius: 6px;
 
     height: ${({ screenWithHeader }) => screenWithHeader ? 102 : 168}px;

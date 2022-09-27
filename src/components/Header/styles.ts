@@ -3,7 +3,6 @@ import { ForkKnife } from "phosphor-react-native";
 
 const Container = styled.View`
     width: 100%;
-    margin-bottom: 20px;
     flex-direction: row;
     justify-content: space-between;
 `

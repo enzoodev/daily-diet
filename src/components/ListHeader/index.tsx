@@ -4,7 +4,7 @@ type Props = {
   title: string;
 }
 
-const HeaderListItem = ({ title }: Props) => {
+const ListHeader = ({ title }: Props) => {
   return(
     <S.Container>
       <S.Title>
@@ -14,4 +14,4 @@ const HeaderListItem = ({ title }: Props) => {
   )
 }
 
-export default HeaderListItem;
+export default ListHeader;

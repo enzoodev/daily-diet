@@ -4,7 +4,7 @@ import * as S from './styles';
 
 type Props = TouchableOpacityProps & MealTypeProps;
 
-const ListItem = ({ hours, meal, ...rest }: Props) => {
+const ListItem = ({ hours, meal, isCorrect, ...rest }: Props) => {
     return(
         <S.Container {...rest}>
             <S.Hours>
@@ -13,6 +13,7 @@ const ListItem = ({ hours, meal, ...rest }: Props) => {
             <S.Title>
                 {meal}
             </S.Title>
+            <S.Circle isActive={isCorrect} />
         </S.Container>
     )
 }

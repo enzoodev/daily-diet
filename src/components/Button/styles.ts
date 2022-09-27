@@ -5,7 +5,7 @@ const Container = styled.TouchableOpacity`
     width: 100%;
     height: 50px;
     border-radius: 6px;
-    margin-top: 50px;
+/*     margin: 20px 0; */
     background-color: ${({ theme }) => theme.COLORS.BASE.GRAY_2};
     flex-direction: row;
     justify-content: center;
