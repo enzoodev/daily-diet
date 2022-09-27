@@ -6,9 +6,9 @@ const Container = styled.View`
 
 const Title = styled.Text`
   ${({ theme }) => css`
-    font-family:;
-    font-size:;
-    color:;
+    font-family: ${theme.FONTS.FAMILY.BOLD};
+    font-size: ${theme.FONTS.SIZE.LG};
+    color: ${theme.COLORS.BASE.GRAY_1};
 `};
 `
 

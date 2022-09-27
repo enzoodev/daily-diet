@@ -1,19 +1,17 @@
 import { TouchableOpacityProps } from 'react-native';
+import { MealTypeProps } from 'src/@types/meal';
 import * as S from './styles';
 
-type Props = TouchableOpacityProps & {
-    hours: string;
-    title: string;
-}
+type Props = TouchableOpacityProps & MealTypeProps;
 
-const ListItem = ({ hours, title, ...rest }: Props) => {
+const ListItem = ({ hours, meal, ...rest }: Props) => {
     return(
         <S.Container {...rest}>
             <S.Hours>
-                20:00
+                {hours}
             </S.Hours>
             <S.Title>
-                Comida refeição 1
+                {meal}
             </S.Title>
         </S.Container>
     )
