@@ -4,7 +4,7 @@ const ListEmpty = () => {
     return(
         <S.Container>
             <S.Title>
-
+                Adicione as refeições diárias
             </S.Title>
         </S.Container>
     )
