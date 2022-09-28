@@ -15,7 +15,7 @@ const Container = styled.View<Props>`
     align-items: center;
     ${({ theme, type, screenWithHeader }) => css`
         height: ${screenWithHeader ? 102 : 168}px;
-        padding-top: ${!screenWithHeader && 20}px;;
+        padding-top: ${!screenWithHeader ? 20 : 0}px;
         background-color: ${type === 'PRIMARY' ?
         theme.COLORS.PRODUCT.GREEN_LIGHT : theme.COLORS.PRODUCT.RED_LIGHT};
     `}

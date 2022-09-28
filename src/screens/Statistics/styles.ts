@@ -16,9 +16,12 @@ const Content = styled.View`
 const Title = styled.Text`
     ${({ theme }) => css`
         font-family: ${theme.FONTS.FAMILY.BOLD};
-        font-size: ${theme.FONTS.SIZE.SM};
+        font-size: ${theme.FONTS.SIZE.MD}px;
         color: ${theme.COLORS.BASE.GRAY_1};
     `}
+    text-align: center;
+    position: relative;
+    bottom: 25px;
 ` 
 
 export { Container, Content, Title };
