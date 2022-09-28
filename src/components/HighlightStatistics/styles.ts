@@ -32,7 +32,7 @@ const Title = styled.Text`
     margin-bottom: 3px;
 `
 
-const Subtitle = styled.Text>`
+const Subtitle = styled.Text`
     ${({ theme }) => css`
         font-family: ${theme.FONTS.FAMILY.REGULAR};
         font-size: ${theme.FONTS.SIZE.SM}px;
