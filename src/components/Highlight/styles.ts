@@ -10,15 +10,15 @@ type Props = HighlightTypeStyleProps;
 
 const Container = styled.View<Props>`
     width: 100%;
-    margin: 20px 0;
     border-radius: 6px;
-
-    height: ${({ screenWithHeader }) => screenWithHeader ? 102 : 168}px;
-    background-color: ${({ theme, type }) => type === 'PRIMARY' ?
-    theme.COLORS.PRODUCT.GREEN_LIGHT : theme.COLORS.PRODUCT.RED_LIGHT};
-
     justify-content: center;
     align-items: center;
+    ${({ theme, type, screenWithHeader }) => css`
+        height: ${screenWithHeader ? 102 : 168}px;
+        padding-top: ${!screenWithHeader && 20}px;;
+        background-color: ${type === 'PRIMARY' ?
+        theme.COLORS.PRODUCT.GREEN_LIGHT : theme.COLORS.PRODUCT.RED_LIGHT};
+    `}
 `
 
 const Title = styled.Text`
@@ -42,9 +42,16 @@ const Icon = styled(MaterialCommunityIcons).attrs<Props>(({ theme, type }) => ({
     color: type === 'PRIMARY' ? theme.COLORS.PRODUCT.GREEN_DARK : theme.COLORS.PRODUCT.RED_DARK
 }))<Props>`
     position: absolute;
-    top: 4px;
     ${({ screenWithHeader }) => screenWithHeader ?
-        css` right: 4px; ` : css` left: 4px; `
+        css`
+            right: 4px;
+            top: 4px;
+        `
+        :
+        css`
+            left: 10px;
+            top: 50px;
+        `
     };
 `
 

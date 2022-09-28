@@ -7,4 +7,10 @@ const Container = styled(SafeAreaView)`
     background-color: ${({ theme }) => theme.COLORS.BASE.GRAY_7};
 `
 
-export { Container };
+const Content = styled.View`
+    height: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+` 
+
+export { Container, Content };

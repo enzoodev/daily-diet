@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components/native";
 
-const Container = styled.View``
+const Container = styled.View`
+    margin-top: 20px;
+`
 
 const Title = styled.Text`
     ${({ theme }) => css`
