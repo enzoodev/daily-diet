@@ -11,6 +11,9 @@ const Statistics = () => {
                 screenWithHeader={false}
             />
             <S.Container>
+                <S.Title>
+                    Estatísticas gerais   
+                 </S.Title>
                 <HighLightStatistics
                     title={22}
                     subtitle='melhor sequência de pratos dentro da dieta'
