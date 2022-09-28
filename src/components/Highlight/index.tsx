@@ -18,8 +18,8 @@ const Highlight = ({ title, screenWithHeader, ...rest}: Props) => {
             </S.Subtitle>
             <S.Icon
                 name={screenWithHeader ? 'arrow-top-right' : 'arrow-left'}
-                {...rest}
                 screenWithHeader={screenWithHeader}
+                {...rest}
             />
         </S.Container>
     )

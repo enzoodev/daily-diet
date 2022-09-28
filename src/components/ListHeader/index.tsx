@@ -5,7 +5,7 @@ type Props = {
 }
 
 const ListHeader = ({ title }: Props) => {
-  return(
+  return (
     <S.Container>
       <S.Title>
         {title}

@@ -4,8 +4,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 const Container = styled.TouchableOpacity`
     width: 100%;
     height: 50px;
+    margin: 6px 0 12px 0;
     border-radius: 6px;
-/*     margin: 20px 0; */
     background-color: ${({ theme }) => theme.COLORS.BASE.GRAY_2};
     flex-direction: row;
     justify-content: center;

@@ -3,7 +3,7 @@ import { SectionList } from 'react-native';
 import { MealTypeProps } from 'src/@types/meal';
 import Header from '@components/Header';
 import Highlight from '@components/Highlight';
-import Button from '@components/Button';
+import ContentButton from '@components/ContentButton';
 import ListItem from '@components/ListItem';
 import ListHeader from '@components/ListHeader';
 import ListEmpty from '@components/ListEmpty';
@@ -58,7 +58,8 @@ const Home = () => {
                 type='PRIMARY'
                 screenWithHeader={true}
             />
-            <Button
+            <ContentButton
+                contentTitle='Refeições'
                 title='Nova refeição'
                 icon='add'
             />
@@ -73,7 +74,14 @@ const Home = () => {
                     />
                 )}
                 renderSectionHeader={({ section: { title } }) => (
-                    <ListHeader title={title} />
+                    <ListHeader
+                        title={title}
+                    />
+                )}
+                ListEmptyComponent = {() => (
+                    <ListEmpty
+                        message='Adicione as refeições diárias'
+                    />
                 )}
                 stickySectionHeadersEnabled={false}
                 showsVerticalScrollIndicator={false}

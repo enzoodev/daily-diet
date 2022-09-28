@@ -1,10 +1,14 @@
 import * as S from './styles';
 
-const ListEmpty = () => {
+type Props = {
+    message: string;
+}
+
+const ListEmpty = ({ message }: Props) => {
     return(
         <S.Container>
             <S.Title>
-                Adicione as refeições diárias
+                {message}
             </S.Title>
         </S.Container>
     )

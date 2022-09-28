@@ -1,11 +1,8 @@
-import { MealTypeProps } from 'src/@types/meal';
 import styled, { css } from 'styled-components/native';
 
-type ActivityTypeStyleProps = {
+type Props = {
     isActive: boolean;
 }
-
-type Props = ActivityTypeStyleProps;
 
 const Container = styled.TouchableOpacity`
     width: 100%;
@@ -46,4 +43,4 @@ const Circle = styled.View<Props>`
     theme.COLORS.PRODUCT.GREEN_MID : theme.COLORS.PRODUCT.RED_MID};
 `
 
-export { ActivityTypeStyleProps, Container, Hours, Title, Circle };
+export { Container, Hours, Title, Circle };
