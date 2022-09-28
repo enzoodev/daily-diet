@@ -22,7 +22,7 @@ const Container = styled.View<Props>`
     `}
 `
 
-const Title = styled.Text<Props>`
+const Title = styled.Text`
     ${({ theme }) => css`
         font-family: ${theme.FONTS.FAMILY.BOLD};
         font-size: ${theme.FONTS.SIZE.LG}px;
@@ -32,7 +32,7 @@ const Title = styled.Text<Props>`
     margin-bottom: 3px;
 `
 
-const Subtitle = styled.Text<Props>`
+const Subtitle = styled.Text>`
     ${({ theme }) => css`
         font-family: ${theme.FONTS.FAMILY.REGULAR};
         font-size: ${theme.FONTS.SIZE.SM}px;
