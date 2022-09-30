@@ -1,13 +1,20 @@
+import Input from '@components/Input';
 import MiniHighlight from '@components/MiniHighlight';
 import * as S from './styles';
 
 const NewMeal = () => {
     return(
-        <S.Container>
+        <>
             <MiniHighlight
-                title='Nomezão'
+                title='Nova refeição'
+                type='DEFAULT'
             />
-        </S.Container>
+            <S.Container>
+                <Input
+                    title={'Nome'}
+                />
+            </S.Container>
+        </>
     )
 }
 
