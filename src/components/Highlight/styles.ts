@@ -3,7 +3,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 type HighlightTypeStyleProps = {
     type: 'PRIMARY' | 'SECONDARY';
-    screenWithHeader: boolean;
+    sideOfIcon: 'LEFT' | 'RIGHT';
 }
 
 type Props = HighlightTypeStyleProps;
@@ -13,9 +13,7 @@ const Container = styled.View<Props>`
     border-radius: 6px;
     justify-content: center;
     align-items: center;
-    ${({ theme, type, screenWithHeader }) => css`
-        height: ${screenWithHeader ? 102 : 168}px;
-        padding-top: ${!screenWithHeader ? 20 : 0}px;
+    ${({ theme, type }) => css`
         background-color: ${type === 'PRIMARY' ?
         theme.COLORS.PRODUCT.GREEN_LIGHT : theme.COLORS.PRODUCT.RED_LIGHT};
     `}
@@ -42,15 +40,15 @@ const Icon = styled(MaterialCommunityIcons).attrs<Props>(({ theme, type }) => ({
     color: type === 'PRIMARY' ? theme.COLORS.PRODUCT.GREEN_DARK : theme.COLORS.PRODUCT.RED_DARK
 }))<Props>`
     position: absolute;
-    ${({ screenWithHeader }) => screenWithHeader ?
+    ${({ sideOfIcon }) => sideOfIcon === 'LEFT' ?
         css`
-            right: 4px;
-            top: 4px;
+            left: 10px;
+            top: 60px;
         `
         :
         css`
-            left: 10px;
-            top: 50px;
+            right: 8px;
+            top: 8px;
         `
     };
 `

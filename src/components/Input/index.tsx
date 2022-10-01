@@ -12,7 +12,6 @@ const Input = ({ title, ...rest }: Props) => {
                 {title}
             </S.Header>
             <S.Title
-                placeholder="useless placeholder"
                 {...rest}
             />
         </S.Container>

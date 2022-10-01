@@ -56,7 +56,9 @@ const Home = () => {
             <Highlight
                 title={90.86}
                 type='PRIMARY'
-                screenWithHeader={true}
+                icon='arrow-top-right'
+                sideOfIcon='RIGHT'
+                style={{ height: 102 }}
             />
             <ContentButton
                 contentTitle='Refeições'

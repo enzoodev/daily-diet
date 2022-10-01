@@ -1,13 +1,20 @@
 import styled, { css } from "styled-components/native";
-import { SafeAreaView } from 'react-native-safe-area-context';
 
-const Container = styled(SafeAreaView)`
+const Container = styled.View`
     flex: 1;
-    padding: 24px;
     background-color: ${({ theme }) => theme.COLORS.BASE.GRAY_7};
 `
 
 const Content = styled.View`
+    flex: 1;
+    padding: 24px;
+    border-radius: 20px;
+    position: relative;
+    bottom: 20px;
+    background-color: ${({ theme }) => theme.COLORS.BASE.GRAY_7};
+` 
+
+const MiniContainer = styled.View`
     height: 100%;
     flex-direction: row;
     justify-content: space-between;
@@ -20,8 +27,7 @@ const Title = styled.Text`
         color: ${theme.COLORS.BASE.GRAY_1};
     `}
     text-align: center;
-    position: relative;
-    bottom: 25px;
+    margin-bottom: 15px;
 ` 
 
-export { Container, Content, Title };
+export { Container, Content, MiniContainer, Title };

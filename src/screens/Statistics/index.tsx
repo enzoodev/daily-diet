@@ -4,13 +4,15 @@ import * as S from './styles';
 
 const Statistics = () => {
     return(
-        <>
+        <S.Container>
             <Highlight
                 title={90.86}
                 type='PRIMARY'
-                screenWithHeader={false}
+                icon='arrow-left'
+                sideOfIcon='LEFT'
+                style={{ height: 168, paddingTop: 20 }}
             />
-            <S.Container>
+            <S.Content>
                 <S.Title>
                     Estatísticas gerais   
                  </S.Title>
@@ -26,7 +28,7 @@ const Statistics = () => {
                     type='DEFAULT'
                     isComplete={true}
                 />
-                <S.Content>
+                <S.MiniContainer>
                     <HighLightStatistics
                         title={99}
                         subtitle='refeições dentro da dieta'
@@ -39,9 +41,9 @@ const Statistics = () => {
                         type='SECONDARY'
                         isComplete={false}
                     />
-                </S.Content>
-            </S.Container>
-        </>
+                </S.MiniContainer>
+            </S.Content>
+        </S.Container>
     )
 }
 

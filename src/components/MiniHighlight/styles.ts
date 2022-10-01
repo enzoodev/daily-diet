@@ -12,7 +12,7 @@ const padding = 44;
 const Container = styled.View<Props>`
     width: 100%;
     height: 124px;
-    padding: ${padding}px;
+    padding-bottom: ${padding}px;
     background-color: ${
         ({ theme, type }) => type === 'DEFAULT' ?
         theme.COLORS.BASE.GRAY_5 : type === 'PRIMARY' ?
@@ -39,7 +39,7 @@ const Icon = styled(MaterialIcons).attrs<Props>(({ theme }) => ({
 }))`
     position: absolute;
     bottom: ${padding}px;
-    left: ${padding - 20}px; /* 20px is how much the screen's Container is on top of the MiniHighlight Container */
+    left: ${padding - 20}px; /* 44 - 20 = padding of the screen's container */
 `;
 
 export { MiniHighlightTypeStyleProps, Container, Title, Icon };

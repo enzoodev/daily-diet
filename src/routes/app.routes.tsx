@@ -12,7 +12,7 @@ const AppRoutes = () => {
                 name='newMeal'
                 component={ NewMeal }
             />
-            <Screen
+           <Screen
                 name='home'
                 component={ Home }
             />

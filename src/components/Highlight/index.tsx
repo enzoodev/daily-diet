@@ -1,13 +1,15 @@
+import { ViewProps } from 'react-native'
 import * as S from './styles';
 
-type Props = S.HighlightTypeStyleProps & {
+type Props = ViewProps & S.HighlightTypeStyleProps & {
     title: number;
+    icon: string;
 }
 
-const Highlight = ({ title, screenWithHeader, ...rest}: Props) => {
+const Highlight = ({ title, icon, type, sideOfIcon, ...rest}: Props) => {
     return(
         <S.Container
-            screenWithHeader={screenWithHeader}
+            type={type}
             {...rest}
         >
             <S.Title>
@@ -17,9 +19,9 @@ const Highlight = ({ title, screenWithHeader, ...rest}: Props) => {
                 das refeições dentro da dieta
             </S.Subtitle>
             <S.Icon
-                name={screenWithHeader ? 'arrow-top-right' : 'arrow-left'}
-                screenWithHeader={screenWithHeader}
-                {...rest}
+                name={icon}
+                type={type}
+                sideOfIcon={sideOfIcon}
             />
         </S.Container>
     )
