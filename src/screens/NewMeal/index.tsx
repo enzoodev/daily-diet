@@ -1,8 +1,19 @@
-import Input from '@components/Input';
+import { useState, useEffect } from 'react';
 import MiniHighlight from '@components/MiniHighlight';
+import Input from '@components/Input';
+import InputMasked from '@components/InputMasked';
 import * as S from './styles';
 
 const NewMeal = () => {
+    const [name, setName] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
+    const [date, setDate] = useState<string>('');
+    const [hours, setHours] = useState<string>('');
+
+    useEffect(() => {
+        console.log(date);
+    }, [date]);
+
     return(
         <S.Container>
             <MiniHighlight
@@ -12,26 +23,36 @@ const NewMeal = () => {
             <S.Content>
                 <Input
                     title={'Nome'}
-                    style={{ height: 48 }}
                     maxLength={40}
+                    style={{ height: 48 }}
+                    onChangeText={setName}
+                    value={name}
                 />
                <Input
                     title={'Descrição'}
-                    style={{ height: 120 }}
                     multiline={true}
                     textAlignVertical={'top'} /* compatibility for Android */
                     maxLength={220}
+                    style={{ height: 120 }}
+                    onChangeText={setDescription}
+                    value={description}
                 />
                 <S.MiniContainer>
-                    <Input
+                    <InputMasked    
                         title={'Data'}
-                        style={{ height: 48, width: 153 }}
+                        type='datetime'
+                        options={{ format: 'DD/MM/YYYY' }}
                         maxLength={10}
+                        onChangeText={setDate}
+                        value={date}
                     />
-                    <Input
+                    <InputMasked
                         title={'Hora'}
-                        style={{ height: 48, width: 153 }}
+                        type='datetime'
+                        options={{ format: 'HH:mm' }}
                         maxLength={5}
+                        onChangeText={setHours}
+                        value={hours}
                     />
                 </S.MiniContainer>
             </S.Content>

@@ -1,11 +1,11 @@
-import { TextInputProps } from 'react-native';
+import { TextInputMaskProps } from 'react-native-masked-text'
 import * as S from './styles';
 
-type Props = TextInputProps &  {
+type Props = TextInputMaskProps & {
     title: string;
 }
 
-const Input = ({ title, ...rest }: Props) => {
+const InputMasked = ({ title, ...rest}: Props) => {
     return(
         <S.Container>
             <S.Header>
@@ -16,4 +16,4 @@ const Input = ({ title, ...rest }: Props) => {
     )
 }
 
-export default Input;
+export default InputMasked;
