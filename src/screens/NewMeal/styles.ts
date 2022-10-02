@@ -1,8 +1,8 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 const Container = styled.View`
     flex: 1;
-    background-color: ${({ theme }) => theme.COLORS.BASE.GRAY_1};
+    background-color: ${({ theme }) => theme.COLORS.BASE.GRAY_7};
 `
 
 const Content = styled.View`
@@ -19,4 +19,13 @@ const MiniContainer = styled.View`
     justify-content: space-between;
 `
 
-export { Container, Content, MiniContainer };
+const HeaderButtonsDiet = styled.Text`
+    margin: 30px 0 5px;
+    ${({ theme }) => css`
+        font-family: ${theme.FONTS.FAMILY.BOLD};
+        font-size: ${theme.FONTS.SIZE.SM}px;
+        color: ${theme.COLORS.BASE.GRAY_1};
+    `};
+`
+
+export { Container, Content, MiniContainer, HeaderButtonsDiet };

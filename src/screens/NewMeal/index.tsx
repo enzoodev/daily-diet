@@ -1,18 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import MiniHighlight from '@components/MiniHighlight';
 import Input from '@components/Input';
 import InputMasked from '@components/InputMasked';
 import * as S from './styles';
+import ButtonDiet from '@components/ButtonDiet';
+import Button from '@components/Button';
 
 const NewMeal = () => {
+    const [isActivedButtonPositive, setIsActivedButtonPositive] = useState<boolean>(false);
+    const [isActivedButtonNegative, setIsActivedButtonNegative] = useState<boolean>(false);
     const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [date, setDate] = useState<string>('');
     const [hours, setHours] = useState<string>('');
-
-    useEffect(() => {
-        console.log(date);
-    }, [date]);
 
     return(
         <S.Container>
@@ -42,7 +42,6 @@ const NewMeal = () => {
                         title={'Data'}
                         type='datetime'
                         options={{ format: 'DD/MM/YYYY' }}
-                        maxLength={10}
                         onChangeText={setDate}
                         value={date}
                     />
@@ -50,11 +49,37 @@ const NewMeal = () => {
                         title={'Hora'}
                         type='datetime'
                         options={{ format: 'HH:mm' }}
-                        maxLength={5}
                         onChangeText={setHours}
                         value={hours}
                     />
                 </S.MiniContainer>
+                <S.HeaderButtonsDiet>
+                    Está dentro da dieta?
+                </S.HeaderButtonsDiet>
+                <S.MiniContainer>
+                    <ButtonDiet
+                        title='Sim'
+                        type='PRIMARY'
+                        isActive={isActivedButtonPositive}
+                        onPress={() => {
+                            setIsActivedButtonPositive(!isActivedButtonPositive)
+                            if(isActivedButtonNegative) setIsActivedButtonNegative(false)
+                        }}
+                    />
+                    <ButtonDiet
+                        title='Não'
+                        type='SECONDARY'
+                        isActive={isActivedButtonNegative}
+                        onPress={() => {
+                            setIsActivedButtonNegative(!isActivedButtonNegative)
+                            if(isActivedButtonPositive) setIsActivedButtonPositive(false)
+                        }}
+                    />
+                </S.MiniContainer>
+                <Button
+                    title='Cadastrar refeição'
+                    style={{ position: 'absolute', bottom: 0, left: 24 }}
+                />
             </S.Content>
         </S.Container>
     )
