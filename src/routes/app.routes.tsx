@@ -4,6 +4,7 @@ import Statistics from '@screens/Statistics';
 import Meal from '@screens/Meal';
 import NewMeal from '@screens/NewMeal';
 import EditMeal from '@screens/EditMeal';
+import FeedBack from '@screens/Feedback';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -29,6 +30,10 @@ const AppRoutes = () => {
             <Screen
                 name='EditMeal'
                 component={ EditMeal }
+            />
+            <Screen
+                name='feedback'
+                component={ FeedBack }
             />
         </Navigator>
     )

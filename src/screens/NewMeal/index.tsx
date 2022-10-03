@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native'
 import MiniHighlight from '@components/MiniHighlight';
 import Input from '@components/Input';
 import InputMasked from '@components/InputMasked';
@@ -7,12 +8,19 @@ import ButtonDiet from '@components/ButtonDiet';
 import Button from '@components/Button';
 
 const NewMeal = () => {
+    const [isInDiet, setIsInDiet] = useState<boolean>();
     const [isActivedButtonPositive, setIsActivedButtonPositive] = useState<boolean>(false);
     const [isActivedButtonNegative, setIsActivedButtonNegative] = useState<boolean>(false);
     const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [date, setDate] = useState<string>('');
     const [hours, setHours] = useState<string>('');
+
+    const navigation = useNavigation();
+
+    const handleInDiet = () => {
+        navigation.navigate('feedback', {isInDiet: true});
+    }
 
     return(
         <S.Container>
@@ -79,6 +87,7 @@ const NewMeal = () => {
                 <Button
                     title='Cadastrar refeição'
                     style={{ position: 'absolute', bottom: 0, left: 24 }}
+                    onPress={handleInDiet}
                 />
             </S.Content>
         </S.Container>

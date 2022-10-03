@@ -7,17 +7,15 @@ type Props = TouchableOpacityProps & S.ButtonDietTypeStyleProps & {
 
 const ButtonDiet = ({ title, type, ...rest }: Props) => {
     return(
-        <>
-            <S.Container
-                type={type}
-                {...rest}
-            >
-                <S.Icon type={type} />
-                <S.Title>
-                    {title}
-                </S.Title>
-            </S.Container>
-        </>
+        <S.Container
+            type={type}
+            {...rest}
+        >
+            <S.Icon type={type} />
+            <S.Title>
+                {title}
+            </S.Title>
+        </S.Container>
     )
 }
 
