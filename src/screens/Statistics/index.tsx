@@ -1,8 +1,15 @@
+import { useNavigation } from '@react-navigation/native';
 import Highlight from '@components/Highlight';
 import HighLightStatistics from '@components/HighlightStatistics';
 import * as S from './styles';
 
 const Statistics = () => {
+    const navigation = useNavigation();
+
+    const handleGoBack = () => {
+        navigation.goBack();
+    }
+
     return(
         <S.Container>
             <Highlight
@@ -11,6 +18,7 @@ const Statistics = () => {
                 icon='arrow-left'
                 sideOfIcon='LEFT'
                 style={{ height: 168, paddingTop: 20 }}
+                onFunction={handleGoBack}
             />
             <S.Content>
                 <S.Title>

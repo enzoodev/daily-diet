@@ -6,7 +6,7 @@ type Props = ButtonComponentTypeProps & {
     contentTitle: string;
 }
 
-const ContentButton = ({ contentTitle, title, icon }: Props) => {
+const ContentButton = ({ contentTitle, title, icon, ...rest }: Props) => {
     return(
         <S.Container>
             <S.Title>
@@ -15,6 +15,7 @@ const ContentButton = ({ contentTitle, title, icon }: Props) => {
             <Button
                 title={title}
                 icon={icon}
+                {...rest}
             />
         </S.Container>
     )

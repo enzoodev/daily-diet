@@ -4,9 +4,10 @@ import * as S from './styles';
 type Props = ViewProps & S.HighlightTypeStyleProps & {
     title: number;
     icon: string;
+    onFunction: () => void;
 }
 
-const Highlight = ({ title, icon, type, sideOfIcon, ...rest}: Props) => {
+const Highlight = ({ title, icon, onFunction, type, sideOfIcon, ...rest}: Props) => {
     return(
         <S.Container
             type={type}
@@ -22,6 +23,7 @@ const Highlight = ({ title, icon, type, sideOfIcon, ...rest}: Props) => {
                 name={icon}
                 type={type}
                 sideOfIcon={sideOfIcon}
+                onPress={onFunction}
             />
         </S.Container>
     )

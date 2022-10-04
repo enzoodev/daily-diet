@@ -12,12 +12,16 @@ const AppRoutes = () => {
     return(
         <Navigator screenOptions={{ headerShown: false }}>
             <Screen
+                name='home'
+                component={ Home }
+            />
+            <Screen
                 name='newMeal'
                 component={ NewMeal }
             />
-           <Screen
-                name='home'
-                component={ Home }
+            <Screen
+                name='feedback'
+                component={ FeedBack }
             />
             <Screen
                 name='statistics'
@@ -30,10 +34,6 @@ const AppRoutes = () => {
             <Screen
                 name='EditMeal'
                 component={ EditMeal }
-            />
-            <Screen
-                name='feedback'
-                component={ FeedBack }
             />
         </Navigator>
     )

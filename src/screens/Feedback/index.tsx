@@ -14,18 +14,21 @@ const FeedBack = () => {
     const route = useRoute();
     const { isInDiet } = route.params as RouteParams;
 
-    console.log(isInDiet);
+    const handleGoInitialScreen = () => {
+        navigation.navigate('home');
+    }
 
     return(
         <S.Container>
-            <S.Icon source={PositiveIllustration} />
             <FeedbackHighlight
-                title='Continue assim!'
+                title={ isInDiet ? 'Continue assim!' : 'Que pena!' }
                 isInDiet={isInDiet}
             />
             { isInDiet ? <S.Icon source={PositiveIllustration} /> : <S.Icon source={NegativeIllustration} /> }
             <Button
                 title='Ir para a página inicial'
+                style={{ width: 240 }}
+                onPress={handleGoInitialScreen}
             />
         </S.Container>
     )

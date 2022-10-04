@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { SectionList } from 'react-native';
 import { MealTypeProps } from 'src/@types/meal';
 import Header from '@components/Header';
@@ -8,6 +9,7 @@ import ListItem from '@components/ListItem';
 import ListHeader from '@components/ListHeader';
 import ListEmpty from '@components/ListEmpty';
 import * as S from './styles';
+import Button from '@components/Button';
 
 type Props = {
     title: string;
@@ -50,6 +52,16 @@ const Home = () => {
         }
     ]);
 
+    const navigation = useNavigation();
+
+    const handleNewMeal = () => {
+        navigation.navigate('newMeal');
+    }
+
+    const handleStatistics = () => {
+        navigation.navigate('statistics');
+    }
+
     return(
         <S.Container>
             <Header />
@@ -59,11 +71,13 @@ const Home = () => {
                 icon='arrow-top-right'
                 sideOfIcon='RIGHT'
                 style={{ height: 102 }}
+                onFunction={handleStatistics}
             />
             <ContentButton
                 contentTitle='Refeições'
                 title='Nova refeição'
                 icon='add'
+                onPress={handleNewMeal}
             />
            <SectionList
                 sections={list}
