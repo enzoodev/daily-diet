@@ -1,12 +1,13 @@
 import { useNavigation, useRoute } from '@react-navigation/native'
-import Button from '@components/Button';
+import { IsInDietTypeProps } from 'src/@types/isInDiet';
 import PositiveIllustration from '@assets/positive/Illustration.png'
 import NegativeIllustration from '@assets/negative/Illustration.png'
-import * as S from './styles';
 import FeedbackHighlight from '@components/FeedbackHighlight';
+import Button from '@components/Button';
+import * as S from './styles';
 
 type RouteParams = {
-    isInDiet: boolean;
+    isInDiet: IsInDietTypeProps;
 }
 
 const FeedBack = () => {

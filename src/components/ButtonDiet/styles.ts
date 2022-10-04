@@ -1,8 +1,9 @@
 import styled, { css } from "styled-components/native";
+import { IsInDietTypeProps } from "src/@types/isInDiet";
 
 type ButtonDietTypeStyleProps = {
     type: 'PRIMARY' | 'SECONDARY';
-    isActive: boolean;
+    isActive: IsInDietTypeProps;
 }
 
 type Props = ButtonDietTypeStyleProps;

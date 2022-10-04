@@ -1,7 +1,8 @@
 import styled, { css } from "styled-components/native";
+import { IsInDietTypeProps } from "src/@types/isInDiet";
 
 type FeedbackHighlightTypeStyleProps = {
-    isInDiet: boolean;
+    isInDiet: IsInDietTypeProps;
 }
 
 type Props = FeedbackHighlightTypeStyleProps;

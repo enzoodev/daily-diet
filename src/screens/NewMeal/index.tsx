@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Alert } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
+import { IsInDietTypeProps } from 'src/@types/isInDiet';
 import MiniHighlight from '@components/MiniHighlight';
 import Input from '@components/Input';
 import InputMasked from '@components/InputMasked';
@@ -9,9 +10,7 @@ import ButtonDiet from '@components/ButtonDiet';
 import Button from '@components/Button';
 
 const NewMeal = () => {
-    const [isActivedButtonPositive, setIsActivedButtonPositive] = useState<boolean>(false);
-    const [isActivedButtonNegative, setIsActivedButtonNegative] = useState<boolean>(false);
-    const [isInDiet, setIsInDiet] = useState<boolean>(false);
+    const [isInDiet, setIsInDiet] = useState<IsInDietTypeProps>(undefined);
     const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [date, setDate] = useState<string>('');
@@ -19,12 +18,8 @@ const NewMeal = () => {
 
     const navigation = useNavigation();
 
-    const handleGoBack = () => {
-        navigation.goBack();
-    }
-
     const handleRegisterMeal = () => {
-        if(!isActivedButtonPositive && !isActivedButtonNegative) return Alert.alert('Nova refeição', 'A refeição está dentro ou fora da dieta?');
+        if(isInDiet == undefined) return Alert.alert('Nova refeição', 'A refeição está dentro ou fora da dieta?');
         navigation.navigate('feedback', {isInDiet: isInDiet});
     }
 
@@ -33,7 +28,6 @@ const NewMeal = () => {
             <MiniHighlight
                 title='Nova refeiçãp'
                 type='DEFAULT'
-                onFunction={handleGoBack}
             />
             <S.Content>
                 <Input
@@ -75,20 +69,16 @@ const NewMeal = () => {
                     <ButtonDiet
                         title='Sim'
                         type='PRIMARY'
-                        isActive={isActivedButtonPositive}
+                        isActive={isInDiet === undefined ? undefined : isInDiet}
                         onPress={() => {
-                            setIsActivedButtonPositive(!isActivedButtonPositive)
-                            if(isActivedButtonNegative) setIsActivedButtonNegative(false)
                             setIsInDiet(true);
                         }}
                     />
                     <ButtonDiet
                         title='Não'
                         type='SECONDARY'
-                        isActive={isActivedButtonNegative}
+                        isActive={isInDiet === undefined ? undefined : !isInDiet}
                         onPress={() => {
-                            setIsActivedButtonNegative(!isActivedButtonNegative)
-                            if(isActivedButtonPositive) setIsActivedButtonPositive(false)
                             setIsInDiet(false);
                         }}
                     />
