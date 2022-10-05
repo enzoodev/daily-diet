@@ -9,7 +9,6 @@ import ListItem from '@components/ListItem';
 import ListHeader from '@components/ListHeader';
 import ListEmpty from '@components/ListEmpty';
 import * as S from './styles';
-import Button from '@components/Button';
 
 type Props = {
     title: string;
@@ -62,6 +61,10 @@ const Home = () => {
         navigation.navigate('statistics');
     }
 
+    const handleGoToMeal = () => {
+        navigation.navigate('meal');
+    }
+
     return(
         <S.Container>
             <Header />
@@ -87,6 +90,7 @@ const Home = () => {
                         meal={item.meal}
                         hours={item.hours}
                         isCorrect={item.isCorrect}
+                        onPress={handleGoToMeal}
                     />
                 )}
                 renderSectionHeader={({ section: { title } }) => (

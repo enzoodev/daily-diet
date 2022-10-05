@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Alert } from 'react-native'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import { IsInDietTypeProps } from 'src/@types/isInDiet';
 import MiniHighlight from '@components/MiniHighlight';
 import Input from '@components/Input';
@@ -26,7 +26,7 @@ const NewMeal = () => {
     return(
         <S.Container>
             <MiniHighlight
-                title='Nova refeiçãp'
+                title='Nova refeição'
                 type='DEFAULT'
             />
             <S.Content>
@@ -70,17 +70,13 @@ const NewMeal = () => {
                         title='Sim'
                         type='PRIMARY'
                         isActive={isInDiet === undefined ? undefined : isInDiet}
-                        onPress={() => {
-                            setIsInDiet(true);
-                        }}
+                        onPress={() => setIsInDiet(true)}
                     />
                     <ButtonDiet
                         title='Não'
                         type='SECONDARY'
                         isActive={isInDiet === undefined ? undefined : !isInDiet}
-                        onPress={() => {
-                            setIsInDiet(false);
-                        }}
+                        onPress={() => setIsInDiet(false)}
                     />
                 </S.MiniContainer>
                 <Button

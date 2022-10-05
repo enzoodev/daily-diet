@@ -28,11 +28,11 @@ const AppRoutes = () => {
                 component={ Statistics }
             />
             <Screen
-                name='Meal'
+                name='meal'
                 component={ Meal }
             />
             <Screen
-                name='EditMeal'
+                name='editMeal'
                 component={ EditMeal }
             />
         </Navigator>

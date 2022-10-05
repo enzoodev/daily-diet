@@ -4,6 +4,7 @@ export declare global {
             home: undefined;
             statistics: undefined;
             newMeal: undefined;
+            meal: undefined;
             feedback: {
                 isInDiet: undefined | boolean;
             }
