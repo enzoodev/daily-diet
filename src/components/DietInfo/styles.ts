@@ -23,7 +23,7 @@ const Icon = styled.View<Props>`
     theme.COLORS.PRODUCT.GREEN_DARK : theme.COLORS.PRODUCT.RED_DARK};
 `
 
-comst Title = styled.Text`
+const Title = styled.Text`
     ${({ theme }) => css`
         font-family: ${theme.FONTS.FAMILY.REGULAR};
         font-size: ${theme.FONTS.SIZE.SM}px;
