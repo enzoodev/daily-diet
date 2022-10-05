@@ -1,4 +1,4 @@
-import styled, { css } styled-components/native';
+import styled, { css } from styled-components/native';
 
 type DietInfoTypeStyleProps = {
     type: 'PRIMARY' | 'SECONDARY';
