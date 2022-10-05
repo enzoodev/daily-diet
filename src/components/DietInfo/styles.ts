@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components/native";
 
 type DietInfoTypeStyleProps = {
-    type: 'PRIMARY' | 'SECONDARY';
+    isInDiet: boolean;
 }
 
 type Props = DietInfoTypeStyleProps;
@@ -19,7 +19,7 @@ const Icon = styled.View<Props>`
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: ${({ theme, type }) => type === 'PRIMARY' ?
+    background-color: ${({ theme, isInDiet }) => isInDiet ?
     theme.COLORS.PRODUCT.GREEN_DARK : theme.COLORS.PRODUCT.RED_DARK};
 `
 
