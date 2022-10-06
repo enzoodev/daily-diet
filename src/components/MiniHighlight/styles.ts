@@ -7,11 +7,11 @@ type MiniHighlightTypeStyleProps = {
 
 type Props = MiniHighlightTypeStyleProps;
 
-const padding = 44;
+const padding = 24;
 
 const Container = styled.View<Props>`
     width: 100%;
-    height: 124px;
+    height: 104px;
     padding-bottom: ${padding}px;
     background-color: ${
         ({ theme, type }) => type === 'DEFAULT' ?
@@ -28,7 +28,7 @@ const Title = styled.Text`
         font-family: ${theme.FONTS.FAMILY.BOLD};
         font-size: ${theme.FONTS.SIZE.LG}px;
         color: ${theme.COLORS.BASE.GRAY_1};
-    `}
+    `};
     text-align: center;
 `
 
@@ -39,7 +39,7 @@ const Icon = styled(MaterialIcons).attrs<Props>(({ theme }) => ({
 }))`
     position: absolute;
     bottom: ${padding}px;
-    left: ${padding - 20}px; /* 44 - 20 = padding of the screen's container */
+    left: ${padding}px;
 `;
 
 export { MiniHighlightTypeStyleProps, Container, Title, Icon };

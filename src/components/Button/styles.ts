@@ -1,29 +1,43 @@
 import styled, { css } from "styled-components/native";
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 
-const Container = styled.TouchableOpacity`
+type ButtonTypeStyleProps = {
+    type: 'DARK' | 'LIGHT';
+}
+
+type Props = ButtonTypeStyleProps;
+
+const Container = styled.TouchableOpacity<Props>`
     width: 100%;
     height: 50px;
-    margin: 6px 0 12px 0;
     border-radius: 6px;
-    background-color: ${({ theme }) => theme.COLORS.BASE.GRAY_2};
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    ${({ theme, type }) => type === 'DARK' ? css`
+        background-color: ${theme.COLORS.BASE.GRAY_2};
+    ` : css`
+        border: 1px solid ${theme.COLORS.BASE.GRAY_1};
+    `};
 `
 
-const Title = styled.Text`
-    ${({ theme }) => css`
+const Title = styled.Text<Props>`
+    ${({ theme, type }) => css`
         font-family: ${theme.FONTS.FAMILY.BOLD};
         font-size: ${theme.FONTS.SIZE.MD}px;
-        color: ${theme.COLORS.BASE.WHITE};
+        color: ${type === 'DARK' ? theme.COLORS.BASE.WHITE : theme.COLORS.BASE.GRAY_1};
     `};
     margin-left: 6px;
 `
 
-const Icon = styled(MaterialIcons).attrs(({ theme }) => ({
+const Icon = styled(MaterialIcons).attrs<Props>(({ theme, type }) => ({
     size: 18,
-    color: theme.COLORS.BASE.WHITE
+    color: type === 'DARK' ? theme.COLORS.BASE.WHITE : theme.COLORS.BASE.GRAY_1
 }))``;
 
-export { Container, Title, Icon };
+const IconCommunity = styled(MaterialCommunityIcons).attrs<Props>(({ theme, type }) => ({
+    size: 18,
+    color: type === 'DARK' ? theme.COLORS.BASE.WHITE : theme.COLORS.BASE.GRAY_1
+}))``;
+
+export { ButtonTypeStyleProps, Container, Title, Icon, IconCommunity };

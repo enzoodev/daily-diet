@@ -1,13 +1,15 @@
-import * as S from './styles';
+import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native'
+import MealBody from '@components/MealBody';
 
-const EditMeal = () => {
+const NewMeal = () => {
+
+
     return(
-        <S.Container>
-            <S.Content>
-
-            </S.Content>
-        </S.Container>
+        <MealBody
+            buttonTitle='Salvar alterações'
+        />
     )
 }
 
-export default EditMeal;
+export default NewMeal;

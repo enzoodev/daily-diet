@@ -4,7 +4,7 @@ import { SectionList } from 'react-native';
 import { MealTypeProps } from 'src/@types/meal';
 import Header from '@components/Header';
 import Highlight from '@components/Highlight';
-import ContentButton from '@components/ContentButton';
+import Button from '@components/Button';
 import ListItem from '@components/ListItem';
 import ListHeader from '@components/ListHeader';
 import ListEmpty from '@components/ListEmpty';
@@ -76,12 +76,17 @@ const Home = () => {
                 style={{ height: 102 }}
                 onFunction={handleStatistics}
             />
-            <ContentButton
-                contentTitle='Refeições'
-                title='Nova refeição'
-                icon='add'
-                onPress={handleNewMeal}
-            />
+            <S.ContentButton>
+                <S.TitleContentButton>
+                    Refeições
+                </S.TitleContentButton>
+                <Button
+                    title='Nova refeição'
+                    icon='add'
+                    type='DARK'
+                    onPress={handleNewMeal}
+                />
+            </S.ContentButton>
            <SectionList
                 sections={list}
                 keyExtractor={(item, index) => item.hours + index}

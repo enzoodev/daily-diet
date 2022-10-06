@@ -28,6 +28,7 @@ const FeedBack = () => {
             { isInDiet ? <S.Icon source={PositiveIllustration} /> : <S.Icon source={NegativeIllustration} /> }
             <Button
                 title='Ir para a página inicial'
+                type='DARK'
                 style={{ width: 240 }}
                 onPress={handleGoInitialScreen}
             />

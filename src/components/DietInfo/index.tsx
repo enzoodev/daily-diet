@@ -3,7 +3,7 @@ import * as S from './styles';
 
 type Props = TouchableOpacityProps & S.DietInfoTypeStyleProps;
 
-const DietInfo = ({ IsInDiet, ...rest }: Props) => {
+const DietInfo = ({ isInDiet, ...rest }: Props) => {
     return(
         <S.Container {...rest}>
             <S.Icon isInDiet={isInDiet} />
