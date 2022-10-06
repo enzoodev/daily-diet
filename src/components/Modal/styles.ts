@@ -2,6 +2,7 @@ import styled, { css } from "styled-components/native";
 
 type ModalTypeStyleProps = {
     type: 'DARK' | 'LIGHT';
+    numberOfButtons: 1 | 2;
 }
 
 type Props = ModalTypeStyleProps;
@@ -43,7 +44,7 @@ const ContentButton = styled.View`
 `
 
 const Button = styled.TouchableOpacity<Props>`
-    width: 48%;
+    width: ${({ numberOfButtons }) => numberOfButtons === 1 ? 100% : 48%};
     height: 26%;
     border-radius: 6px;
     justify-content: center;
