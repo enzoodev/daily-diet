@@ -8,6 +8,7 @@ export declare global {
             feedback: {
                 isInDiet: undefined | boolean;
             }
+            editMeal: undefined;
         }
     }
 }

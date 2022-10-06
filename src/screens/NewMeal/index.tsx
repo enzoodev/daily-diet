@@ -7,6 +7,7 @@ const NewMeal = () => {
 
     return(
         <MealBody
+            highlightTitle='Nova refeição'
             buttonTitle='Cadastrar refeição'
         />
     )

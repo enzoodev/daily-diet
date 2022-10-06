@@ -7,11 +7,11 @@ type MiniHighlightTypeStyleProps = {
 
 type Props = MiniHighlightTypeStyleProps;
 
-const padding = 24;
+const padding = 44;
 
 const Container = styled.View<Props>`
     width: 100%;
-    height: 104px;
+    height: 124px;
     padding-bottom: ${padding}px;
     background-color: ${
         ({ theme, type }) => type === 'DEFAULT' ?
@@ -39,7 +39,7 @@ const Icon = styled(MaterialIcons).attrs<Props>(({ theme }) => ({
 }))`
     position: absolute;
     bottom: ${padding}px;
-    left: ${padding}px;
+    left: ${padding - 20}px;
 `;
 
 export { MiniHighlightTypeStyleProps, Container, Title, Icon };

@@ -2,18 +2,33 @@ import styled, { css } from "styled-components/native";
 
 type ModalTypeStyleProps = {
     type: 'DARK' | 'LIGHT';
+    typeTwo?: 'DARK' | 'LIGHT';
     numberOfButtons: 1 | 2;
 }
 
 type Props = ModalTypeStyleProps;
 
-const Container = styled.View`
-    position: absolute;
+const Background = styled.View`
     flex: 1;
-    opacity: 25%;
+    opacity: .25;
+    background-color: black;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+`
+
+const Container = styled.View`
+    flex: 1;
+    padding: 24px;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    position: absolute;
+    top: 0;
+    bottom: 0%;
+    left: 0;
+    right: 0;
 `
 
 const Content = styled.View`
@@ -21,6 +36,7 @@ const Content = styled.View`
     height: 24%;
     padding: 23px;
     border-radius: 6px;
+    opacity: 1.0;
     justify-content: space-between;
     align-items: center;
     background-color: ${({ theme }) => theme.COLORS.BASE.GRAY_7};
@@ -29,7 +45,7 @@ const Content = styled.View`
 const Title = styled.Text`
     ${({ theme }) => css`
         font-family: ${theme.FONTS.FAMILY.BOLD};
-        font-size: ${theme.FONTS.SIZE.MD};
+        font-size: ${theme.FONTS.SIZE.LG}px;
         color: ${theme.COLORS.BASE.GRAY_2};
     `};
     width: 80%;
@@ -44,23 +60,24 @@ const ContentButton = styled.View`
 `
 
 const Button = styled.TouchableOpacity<Props>`
-    width: ${({ numberOfButtons }) => numberOfButtons === 1 ? 100% : 48%};
-    height: 26%;
+    width: ${({ numberOfButtons }) => numberOfButtons === 1 ? 100 : 48}%;
+    height: 50px;
     border-radius: 6px;
     justify-content: center;
     align-items: center;
-    {({ theme, type }) type === 'DARK' ?
+    ${({ theme, type, typeTwo }) => type === 'DARK' || typeTwo === 'DARK' ?
         css` background-color: ${theme.COLORS.BASE.GRAY_2}; `
         : css` border: 1px solid ${theme.COLORS.BASE.GRAY_1}; `
     }
 `
 
 const ButtonTitle = styled.Text<Props>`
-    ${({ theme, type }) => css`
+    ${({ theme, type, typeTwo }) => css`
         font-family: ${theme.FONTS.FAMILY.BOLD};
-        font-size: ${theme.FONTS.SIZE.SM};
-        color: ${type === 'DARK' ? theme.COLORS.BASE.WHITE : theme.COLORS.BASE.GRAY_1};
+        font-size: ${theme.FONTS.SIZE.MD}px;
+        color: ${type === 'DARK' || typeTwo === 'DARK' ?
+        theme.COLORS.BASE.WHITE : theme.COLORS.BASE.GRAY_1};
     `};
 `
 
-export { ModalTypeStyleProps, Container, Content, Title, ContentButton, Button, ButtonTitle };
+export { ModalTypeStyleProps, Background, Container, Content, Title, ContentButton, Button, ButtonTitle };
