@@ -1,3 +1,3 @@
-const DATE_COLLECTION = '@daily-diet:dates';
+const DAYSOFDIET_COLLECTION = '@daily-diet:daysOfDiet';
 
-export { DATE_COLLECTION };
+export { DAYSOFDIET_COLLECTION };

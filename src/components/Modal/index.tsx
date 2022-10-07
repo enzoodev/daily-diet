@@ -4,6 +4,7 @@ import * as S from './styles';
 type Props = S.ModalTypeStyleProps & {
     isVisible: boolean;
     title: string;
+    subtitle: string;
     buttonTitle: string;
     buttonTitleTwo?: string;
     onFunction: () => void;
@@ -11,7 +12,7 @@ type Props = S.ModalTypeStyleProps & {
 }
 
 const Modal = ({
-    isVisible, title, numberOfButtons, type, typeTwo,
+    isVisible, title, subtitle, numberOfButtons, type, typeTwo,
     buttonTitle, buttonTitleTwo, onFunction, onFunctionTwo
 }: Props) => {
     return(
@@ -20,9 +21,14 @@ const Modal = ({
                 <S.Background />
                 <S.Container>                
                     <S.Content>
-                        <S.Title>
-                            {title}
-                        </S.Title>
+                        <S.TitleContainer>
+                            <S.Title>
+                                {title}
+                            </S.Title>
+                            <S.Subtitle>
+                                {subtitle}
+                            </S.Subtitle>
+                        </S.TitleContainer>
                         <S.ContentButton>
                             <S.Button
                                 type={type}

@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native'
 import { MealTypeProps } from 'src/@types/meal';
-import { IsInDietTypeProps } from 'src/@types/isInDiet';
-import dateCreate from '@storage/date/dateCreate';
+import dayOfDietCreate from '@storage/date/dayOfDietCreate';
 import MiniHighlight from '@components/MiniHighlight';
 import Input from '@components/Input';
 import InputMasked from '@components/InputMasked';
@@ -22,16 +21,24 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
         meal: '',
         date: '',
         hour: '',
-        isCorrect: false
+        isInDiet: undefined
     });
-    const [isInDiet, setIsInDiet] = useState<IsInDietTypeProps>(undefined);
     const [viewModal, setViewModal] = useState<boolean>(false);
     const navigation = useNavigation();
 
+    const authenticateData = () => {
+        const properties: any[] = Object.values(meal);
+        const nullProperties: boolean = properties.filter((item) => item === '' || item === undefined).length > 0;
+        const authenticatedDate: boolean = meal.date.length === 10;
+        const authenticatedhour: boolean = meal.hour.length === 5;
+        const authenticatedData: boolean = !nullProperties && authenticatedDate && authenticatedhour;
+        return authenticatedData;
+    }
+
     const handleRegisterMeal = async () => {
-        if(isInDiet === undefined) return setViewModal(true);
-        await dateCreate(meal.date);
-        navigation.navigate('feedback', {isInDiet: isInDiet});
+        if(!authenticateData()) return setViewModal(true);
+        await dayOfDietCreate(meal.date);
+        navigation.navigate('feedback', {isInDiet: meal.isInDiet});
     }
 
     return(
@@ -81,14 +88,14 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
                         <ButtonDiet
                             title='Sim'
                             type='PRIMARY'
-                            isActive={isInDiet === undefined ? undefined : isInDiet}
-                            onPress={() => setIsInDiet(true)}
+                            isActive={meal.isInDiet === undefined ? undefined : meal.isInDiet}
+                            onPress={() => setMeal(prevState => ({ ...prevState, isInDiet: true}))}
                         />
                         <ButtonDiet
                             title='Não'
                             type='SECONDARY'
-                            isActive={isInDiet === undefined ? undefined : !isInDiet}
-                            onPress={() => setIsInDiet(false)}
+                            isActive={meal.isInDiet === undefined ? undefined : !meal.isInDiet}
+                            onPress={() => setMeal(prevState => ({ ...prevState, isInDiet: false}))}
                         />
                     </S.MiniContainer>
                 </S.SubContent>
@@ -100,7 +107,8 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
             </S.Content>
             <Modal
                 isVisible={viewModal}
-                title='Selecione se a refeição está dentro ou fora da dieta'
+                title='Nova Refeição'
+                subtitle='Preencha corretamente todos os campos'
                 numberOfButtons={1}
                 type='DARK'
                 buttonTitle='Ok'

@@ -1,15 +1,15 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { DATE_COLLECTION } from "../storageConfig";
+import { DAYSOFDIET_COLLECTION } from "../storageConfig";
 
-const datesGetAll = async () => {
+const daysOfDietGetAll = async () => {
     try{
-        const storage = await AsyncStorage.getItem(DATE_COLLECTION);
-        const dates: string = storage ? JSON.parse(storage) : [];
-        return dates;
+        const storage = await AsyncStorage.getItem(DAYSOFDIET_COLLECTION);
+        const daysOfDiet: string = storage ? JSON.parse(storage) : [];
+        return daysOfDiet;
     }
     catch(error){
         throw error;
     }
 }
 
-export default datesGetAll;
+export default daysOfDietGetAll;

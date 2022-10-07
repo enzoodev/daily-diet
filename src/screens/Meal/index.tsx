@@ -60,7 +60,8 @@ const Meal = () => {
             </S.Content>
             <Modal
                 isVisible={viewModal}
-                title='Deseja realmente excluir o registro da refeição?'
+                title='Refeição'
+                subtitle='Deseja realmente excluir o registro da refeição?'
                 numberOfButtons={2}
                 type='LIGHT'
                 typeTwo='DARK'

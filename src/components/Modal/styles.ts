@@ -42,14 +42,27 @@ const Content = styled.View`
     background-color: ${({ theme }) => theme.COLORS.BASE.GRAY_7};
 `
 
+const TitleContainer = styled.View`
+    align-items: center;
+    width: 100%;
+`
+
 const Title = styled.Text`
     ${({ theme }) => css`
         font-family: ${theme.FONTS.FAMILY.BOLD};
         font-size: ${theme.FONTS.SIZE.LG}px;
-        color: ${theme.COLORS.BASE.GRAY_2};
+        color: ${theme.COLORS.BASE.GRAY_1};
     `};
-    width: 80%;
-    margin-top: 15px;
+    margin-bottom:5px;
+`
+
+const Subtitle = styled.Text`
+    ${({ theme }) => css`
+        font-family: ${theme.FONTS.FAMILY.BOLD};
+        font-size: ${theme.FONTS.SIZE.MD}px;
+        color: ${theme.COLORS.BASE.GRAY_3};
+    `};
+    width: 70%;
     text-align: center;
 `
         
@@ -80,4 +93,4 @@ const ButtonTitle = styled.Text<Props>`
     `};
 `
 
-export { ModalTypeStyleProps, Background, Container, Content, Title, ContentButton, Button, ButtonTitle };
+export { ModalTypeStyleProps, Background, Container, Content, TitleContainer, Title, Subtitle, ContentButton, Button, ButtonTitle };
