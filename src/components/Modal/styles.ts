@@ -11,12 +11,12 @@ type Props = ModalTypeStyleProps;
 const Background = styled.View`
     flex: 1;
     opacity: .25;
-    background-color: black;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    background-color: ${({ theme }) => theme.COLORS.BASE.BLACK};
 `
 
 const Container = styled.View`

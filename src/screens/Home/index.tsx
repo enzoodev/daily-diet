@@ -17,38 +17,14 @@ type Props = {
 
 const Home = () => {
     const [list, setList] = useState<Props[]>([
-        {
+/*         {
             title: '29.09.2022', 
             data: [
-                {hours: '08:00', meal: 'refeição 1', isCorrect: true},
-                {hours: '13:00', meal: 'refeição 2', isCorrect: true},
-                {hours: '19:00', meal: 'refeição 3', isCorrect: true}
+                {hour: '08:00', title: 'refeição 1', meal: 'descrição da refeição', isCorrect: true},
+                {hour: '13:00', title: 'refeição 2', meal: 'descrição da refeição', isCorrect: true},
+                {hour: '19:00', title: 'refeição 3', meal: 'descrição da refeição', isCorrect: true}
             ]
-        },
-        {
-            title: '28.09.2022', 
-            data: [
-                {hours: '08:00', meal: 'refeição 1', isCorrect: true},
-                {hours: '13:00', meal: 'refeição 2', isCorrect: true},
-                {hours: '19:00', meal: 'refeição 3', isCorrect: true}
-            ]
-        },
-        {
-            title: '27.09.2022', 
-            data: [
-                {hours: '08:00', meal: 'refeição 1', isCorrect: true},
-                {hours: '13:00', meal: 'refeição 2', isCorrect: true},
-                {hours: '19:00', meal: 'refeição 3', isCorrect: true}
-            ]
-        },
-        {
-            title: '26.09.2022', 
-            data: [
-                {hours: '08:00', meal: 'refeição 1', isCorrect: true},
-                {hours: '13:00', meal: 'refeição 2', isCorrect: true},
-                {hours: '19:00', meal: 'refeição 3', isCorrect: true}
-            ]
-        }
+        } */
     ]);
 
     const navigation = useNavigation();
@@ -89,11 +65,13 @@ const Home = () => {
             </S.ContentButton>
            <SectionList
                 sections={list}
-                keyExtractor={(item, index) => item.hours + index}
+                keyExtractor={(item, index) => item.hour + index}
                 renderItem={({ item }) => (
                     <ListItem
+                        title={item.title}
                         meal={item.meal}
-                        hours={item.hours}
+                        date={item.date}
+                        hour={item.hour}
                         isCorrect={item.isCorrect}
                         onPress={handleGoToMeal}
                     />

@@ -1,6 +1,7 @@
 export default {
     COLORS: {
         BASE: {
+            BLACK: '#000000',
             GRAY_1: '#1B1D1E',
             GRAY_2: '#333638',
             GRAY_3: '#5C6265',

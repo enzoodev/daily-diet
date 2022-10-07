@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { MealTypeProps } from 'src/@types/meal';
 import { IsInDietTypeProps } from 'src/@types/isInDiet';
+import dateCreate from '@storage/date/dateCreate';
 import MiniHighlight from '@components/MiniHighlight';
 import Input from '@components/Input';
 import InputMasked from '@components/InputMasked';
 import ButtonDiet from '@components/ButtonDiet';
 import Button from '@components/Button';
+import Modal from '@components/Modal';
 import * as S from './styles';
 
 type Props = {
@@ -15,16 +17,20 @@ type Props = {
 }
 
 const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
+    const [meal, setMeal] = useState<MealTypeProps>({
+        title: '',
+        meal: '',
+        date: '',
+        hour: '',
+        isCorrect: false
+    });
     const [isInDiet, setIsInDiet] = useState<IsInDietTypeProps>(undefined);
-    const [name, setName] = useState<string>('');
-    const [description, setDescription] = useState<string>('');
-    const [date, setDate] = useState<string>('');
-    const [hours, setHours] = useState<string>('');
-
+    const [viewModal, setViewModal] = useState<boolean>(false);
     const navigation = useNavigation();
 
-    const handleRegisterMeal = () => {
-        if(isInDiet == undefined) return Alert.alert('Nova refeição', 'A refeição está dentro ou fora da dieta?');
+    const handleRegisterMeal = async () => {
+        if(isInDiet === undefined) return setViewModal(true);
+        await dateCreate(meal.date);
         navigation.navigate('feedback', {isInDiet: isInDiet});
     }
 
@@ -40,8 +46,8 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
                         title={'Nome'}
                         maxLength={40}
                         style={{ height: 48 }}
-                        onChangeText={setName}
-                        value={name}
+                        value={meal.title}
+                        onChangeText={(text) => setMeal(prevState => ({ ...prevState, title: text }))}
                     />
                     <Input
                         title={'Descrição'}
@@ -49,23 +55,23 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
                         textAlignVertical={'top'} /* compatibility for Android */
                         maxLength={220}
                         style={{ height: 120 }}
-                        onChangeText={setDescription}
-                        value={description}
+                        value={meal.meal}
+                        onChangeText={(text) => setMeal(prevState => ({ ...prevState, meal: text }))}
                     />
                     <S.MiniContainer>
                         <InputMasked    
                             title={'Data'}
                             type='datetime'
                             options={{ format: 'DD/MM/YYYY' }}
-                            onChangeText={setDate}
-                            value={date}
+                            value={meal.date}
+                            onChangeText={(text) => setMeal(prevState => ({ ...prevState, date: text }))}
                         />
                         <InputMasked
                             title={'Hora'}
                             type='datetime'
                             options={{ format: 'HH:mm' }}
-                            onChangeText={setHours}
-                            value={hours}
+                            value={meal.hour}
+                            onChangeText={(text) => setMeal(prevState => ({ ...prevState, hour: text }))}
                         />
                     </S.MiniContainer>
                     <S.HeaderButtonsDiet>
@@ -92,6 +98,14 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
                     onPress={handleRegisterMeal}
                 />
             </S.Content>
+            <Modal
+                isVisible={viewModal}
+                title='Selecione se a refeição está dentro ou fora da dieta'
+                numberOfButtons={1}
+                type='DARK'
+                buttonTitle='Ok'
+                onFunction={() => setViewModal(false)}
+            />
         </S.Container>
     )
 }
