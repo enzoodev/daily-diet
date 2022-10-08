@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useState, useCallback } from 'react';
 import { SectionList } from 'react-native';
-import { MealTypeProps } from 'src/@types/meal';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import daysOfDietGetAll from '@storage/date/daysOfDietGetAll';
+import { MealListTypeProps } from 'src/@types/mealList';
 import Header from '@components/Header';
 import Highlight from '@components/Highlight';
 import Button from '@components/Button';
@@ -9,21 +10,15 @@ import ListItem from '@components/ListItem';
 import ListHeader from '@components/ListHeader';
 import ListEmpty from '@components/ListEmpty';
 import * as S from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-type Props = {
-    title: string;
-    data: MealTypeProps[];
-}
+type Props = MealListTypeProps;
 
 const Home = () => {
     const [list, setList] = useState<Props[]>([
 /*         {
-            title: '29.09.2022', 
-            data: [
-                {hour: '08:00', title: 'refeição 1', meal: 'descrição da refeição', isCorrect: true},
-                {hour: '13:00', title: 'refeição 2', meal: 'descrição da refeição', isCorrect: true},
-                {hour: '19:00', title: 'refeição 3', meal: 'descrição da refeição', isCorrect: true}
-            ]
+            date: '29.09.2022', 
+            data: [{title: 'refeição 1', meal: 'descrição da refeição', hour: '08:00', isInDiet: true}]
         } */
     ]);
 
@@ -40,6 +35,22 @@ const Home = () => {
     const handleGoToMeal = () => {
         navigation.navigate('meal');
     }
+
+    const fetchDaysOfDiet = async () => {
+        try{
+            const data = await daysOfDietGetAll();
+            console.log(JSON.stringify(data[0]));
+            console.log(data[0]);
+            /* setList([...list, data[0]]); */
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
+    useFocusEffect(useCallback(() => {
+        fetchDaysOfDiet();
+    }, []))
 
     return(
         <S.Container>
@@ -70,15 +81,14 @@ const Home = () => {
                     <ListItem
                         title={item.title}
                         meal={item.meal}
-                        date={item.date}
                         hour={item.hour}
-                        isCorrect={item.isCorrect}
+                        isInDiet={item.isInDiet}
                         onPress={handleGoToMeal}
                     />
                 )}
-                renderSectionHeader={({ section: { title } }) => (
+                renderSectionHeader={({ section: { date } }) => (
                     <ListHeader
-                        title={title}
+                        title={date}
                     />
                 )}
                 ListEmptyComponent = {() => (

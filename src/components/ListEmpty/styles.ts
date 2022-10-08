@@ -8,9 +8,9 @@ const Container = styled.View`
 
 const Title = styled.Text`
     ${({ theme }) => css`
-        font-family: ${theme.FONTS.FAMILY.REGULAR};
-        font-size: ${theme.FONTS.SIZE.MD}px;
-        color: ${theme.COLORS.BASE.GRAY_3};
+        font-family: ${theme.FONTS.FAMILY.BOLD};
+        font-size: ${theme.FONTS.SIZE.LG}px;
+        color: ${theme.COLORS.BASE.GRAY_2};
     `};
 `
 

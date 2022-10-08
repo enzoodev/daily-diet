@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native'
-import { MealTypeProps } from 'src/@types/meal';
+import { MealListTypeProps } from 'src/@types/mealList';
 import dayOfDietCreate from '@storage/date/dayOfDietCreate';
 import MiniHighlight from '@components/MiniHighlight';
 import Input from '@components/Input';
@@ -16,29 +16,36 @@ type Props = {
 }
 
 const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
-    const [meal, setMeal] = useState<MealTypeProps>({
-        title: '',
-        meal: '',
+    const [meal, setMeal] = useState<MealListTypeProps>({
         date: '',
-        hour: '',
-        isInDiet: undefined
+        data: [{
+            title: '',
+            meal: '',
+            hour: '',
+            isInDiet: undefined
+        }]
     });
     const [viewModal, setViewModal] = useState<boolean>(false);
     const navigation = useNavigation();
 
     const authenticateData = () => {
-        const properties: any[] = Object.values(meal);
+        const properties: any[] = Object.values(meal.data[0]);
         const nullProperties: boolean = properties.filter((item) => item === '' || item === undefined).length > 0;
         const authenticatedDate: boolean = meal.date.length === 10;
-        const authenticatedhour: boolean = meal.hour.length === 5;
-        const authenticatedData: boolean = !nullProperties && authenticatedDate && authenticatedhour;
+        const authenticatedHour: boolean = meal.data[0].hour.length === 5;
+        const authenticatedData: boolean = !nullProperties && authenticatedDate && authenticatedHour;
         return authenticatedData;
     }
 
     const handleRegisterMeal = async () => {
-        if(!authenticateData()) return setViewModal(true);
-        await dayOfDietCreate(meal.date);
-        navigation.navigate('feedback', {isInDiet: meal.isInDiet});
+        try{
+            if(!authenticateData()) return setViewModal(true);
+            await dayOfDietCreate(meal);
+            navigation.navigate('feedback', {isInDiet: meal.data[0].isInDiet});
+        }
+        catch(error){
+            console.log(error);
+        }
     }
 
     return(
@@ -53,8 +60,8 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
                         title={'Nome'}
                         maxLength={40}
                         style={{ height: 48 }}
-                        value={meal.title}
-                        onChangeText={(text) => setMeal(prevState => ({ ...prevState, title: text }))}
+                        value={meal.data[0].title}
+                        onChangeText={(text) => setMeal({ date: meal.date, data: [{...meal.data[0], title: text}] })}
                     />
                     <Input
                         title={'Descrição'}
@@ -62,8 +69,8 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
                         textAlignVertical={'top'} /* compatibility for Android */
                         maxLength={220}
                         style={{ height: 120 }}
-                        value={meal.meal}
-                        onChangeText={(text) => setMeal(prevState => ({ ...prevState, meal: text }))}
+                        value={meal.data[0].meal}
+                        onChangeText={(text) => setMeal({ date: meal.date, data: [{...meal.data[0], meal: text}] })}
                     />
                     <S.MiniContainer>
                         <InputMasked    
@@ -77,8 +84,8 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
                             title={'Hora'}
                             type='datetime'
                             options={{ format: 'HH:mm' }}
-                            value={meal.hour}
-                            onChangeText={(text) => setMeal(prevState => ({ ...prevState, hour: text }))}
+                            value={meal.data[0].hour}
+                            onChangeText={(text) => setMeal({ date: meal.date, data: [{...meal.data[0], hour: text}] })}
                         />
                     </S.MiniContainer>
                     <S.HeaderButtonsDiet>
@@ -88,14 +95,14 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
                         <ButtonDiet
                             title='Sim'
                             type='PRIMARY'
-                            isActive={meal.isInDiet === undefined ? undefined : meal.isInDiet}
-                            onPress={() => setMeal(prevState => ({ ...prevState, isInDiet: true}))}
+                            isActive={meal.data[0].isInDiet === undefined ? undefined : meal.data[0].isInDiet}
+                            onPress={() => setMeal({ date: meal.date, data: [{...meal.data[0], isInDiet: true}] })}
                         />
                         <ButtonDiet
                             title='Não'
                             type='SECONDARY'
-                            isActive={meal.isInDiet === undefined ? undefined : !meal.isInDiet}
-                            onPress={() => setMeal(prevState => ({ ...prevState, isInDiet: false}))}
+                            isActive={meal.data[0].isInDiet === undefined ? undefined : !meal.data[0].isInDiet}
+                            onPress={() => setMeal({ date: meal.date, data: [{...meal.data[0], isInDiet: false}] })}
                         />
                     </S.MiniContainer>
                 </S.SubContent>
