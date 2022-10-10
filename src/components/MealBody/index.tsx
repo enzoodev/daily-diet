@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
-import { MealListTypeProps } from 'src/@types/mealList';
+import { NewMealTypeProps } from 'src/@types/meal';
 import { AuthenticateDataTypeProps } from 'src/@types/authenticateData';
 import { AppError } from '@utils/AppError';
 import dayOfDietCreate from '@storage/date/dayOfDietCreate';
@@ -12,7 +11,6 @@ import ButtonDiet from '@components/ButtonDiet';
 import Button from '@components/Button';
 import Modal from '@components/Modal';
 import * as S from './styles';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Props = {
     highlightTitle: string;
@@ -20,14 +18,14 @@ type Props = {
 }
 
 const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
-    const [meal, setMeal] = useState<MealListTypeProps>({
+    const [meal, setMeal] = useState<NewMealTypeProps>({
         date: '',
-        data: [{
+        data: {
             title: '',
             meal: '',
             hour: '',
             isInDiet: undefined
-        }]
+        }
     });
     const [viewModal, setViewModal] = useState<boolean>(false);
     const [subtitleModal, setSubtitleModal] = useState<string>('');
@@ -36,10 +34,10 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
     const authenticateData = () => {
         const authenticate: AuthenticateDataTypeProps = {
             date: meal.date.length === 10,
-            hour: meal.data[0].hour.length === 5,
-            title: meal.data[0].title.length > 0,
-            meal: meal.data[0].meal.length > 0,
-            isInDiet: meal.data[0].isInDiet !== undefined
+            hour: meal.data.hour.length === 5,
+            title: meal.data.title.trim().length > 0,
+            meal: meal.data.meal.trim().length > 0,
+            isInDiet: meal.data.isInDiet !== undefined
         }
         const unauthenticatedData: boolean[] = Object.values(authenticate).filter((item) => item === false);
         const authenticatedData: boolean = unauthenticatedData.length === 0;     
@@ -50,7 +48,7 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
         try{
             if(authenticateData()) {
                 await dayOfDietCreate(meal);
-                navigation.navigate('feedback', {isInDiet: meal.data[0].isInDiet});
+                /* navigation.navigate('feedback', {isInDiet: meal.data.isInDiet}); */
             }
             else{
                 setViewModal(true);
@@ -58,9 +56,15 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
             }
         }
         catch(error){
-            if(error instanceof AppError) return Alert.alert('Nova refeição', error.message);
-            Alert.alert('Nova refeição', 'Não foi posível cadastrar a refeição');
-            console.log(error);
+            if(error instanceof AppError){
+                
+                setSubtitleModal(error.message);
+            }
+            else{
+            
+                setSubtitleModal('Não foi possível cadastrar a refeição');
+            }
+            setViewModal(true);
         }
     }
 
@@ -76,8 +80,8 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
                         title={'Nome'}
                         maxLength={40}
                         style={{ height: 48 }}
-                        value={meal.data[0].title}
-                        onChangeText={(text) => setMeal({ date: meal.date, data: [{...meal.data[0], title: text}] })}
+                        value={meal.data.title}
+                        onChangeText={(text) => setMeal({ date: meal.date, data: {...meal.data, title: text} })}
                     />
                     <Input
                         title={'Descrição'}
@@ -85,8 +89,8 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
                         textAlignVertical={'top'} /* compatibility for Android */
                         maxLength={220}
                         style={{ height: 120 }}
-                        value={meal.data[0].meal}
-                        onChangeText={(text) => setMeal({ date: meal.date, data: [{...meal.data[0], meal: text}] })}
+                        value={meal.data.meal}
+                        onChangeText={(text) => setMeal({ date: meal.date, data: {...meal.data, meal: text} })}
                     />
                     <S.MiniContainer>
                         <InputMasked    
@@ -100,8 +104,8 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
                             title={'Hora'}
                             type='datetime'
                             options={{ format: 'HH:mm' }}
-                            value={meal.data[0].hour}
-                            onChangeText={(text) => setMeal({ date: meal.date, data: [{...meal.data[0], hour: text}] })}
+                            value={meal.data.hour}
+                            onChangeText={(text) => setMeal({ date: meal.date, data: {...meal.data, hour: text} })}
                         />
                     </S.MiniContainer>
                     <S.HeaderButtonsDiet>
@@ -111,14 +115,14 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
                         <ButtonDiet
                             title='Sim'
                             type='PRIMARY'
-                            isActive={meal.data[0].isInDiet === undefined ? undefined : meal.data[0].isInDiet}
-                            onPress={() => setMeal({ date: meal.date, data: [{...meal.data[0], isInDiet: true}] })}
+                            isActive={meal.data.isInDiet === undefined ? undefined : meal.data.isInDiet}
+                            onPress={() => setMeal({ date: meal.date, data: {...meal.data, isInDiet: true} })}
                         />
                         <ButtonDiet
                             title='Não'
                             type='SECONDARY'
-                            isActive={meal.data[0].isInDiet === undefined ? undefined : !meal.data[0].isInDiet}
-                            onPress={() => setMeal({ date: meal.date, data: [{...meal.data[0], isInDiet: false}] })}
+                            isActive={meal.data.isInDiet === undefined ? undefined : !meal.data.isInDiet}
+                            onPress={() => setMeal({ date: meal.date, data: {...meal.data, isInDiet: false} })}
                         />
                     </S.MiniContainer>
                 </S.SubContent>

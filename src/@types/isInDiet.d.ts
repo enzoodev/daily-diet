@@ -1,1 +1,0 @@
-export type IsInDietTypeProps = boolean | undefined;

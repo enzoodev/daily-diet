@@ -1,8 +1,8 @@
 import { useState, useCallback } from 'react';
 import { SectionList } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { MealListTypeProps } from 'src/@types/meal';
 import daysOfDietGetAll from '@storage/date/daysOfDietGetAll';
-import { MealListTypeProps } from 'src/@types/mealList';
 import Header from '@components/Header';
 import Highlight from '@components/Highlight';
 import Button from '@components/Button';
@@ -10,17 +10,11 @@ import ListItem from '@components/ListItem';
 import ListHeader from '@components/ListHeader';
 import ListEmpty from '@components/ListEmpty';
 import * as S from './styles';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Props = MealListTypeProps;
 
 const Home = () => {
-    const [list, setList] = useState<Props[]>([
-/*         {
-            date: '29.09.2022', 
-            data: [{title: 'refeição 1', meal: 'descrição da refeição', hour: '08:00', isInDiet: true}]
-        } */
-    ]);
+    const [list, setList] = useState<Props[]>([]);
     const navigation = useNavigation();
     
     const handleScreens = {
@@ -32,7 +26,7 @@ const Home = () => {
     const fetchDaysOfDiet = async() => {
         try{
             const data = await daysOfDietGetAll();
-            setList([data[0]]);
+            setList(data);
         }
         catch(error){
             console.log(error);
@@ -87,7 +81,6 @@ const Home = () => {
                         message='Adicione as refeições diárias'
                     />
                 )}
-                stickySectionHeadersEnabled={false}
                 showsVerticalScrollIndicator={false}
             />
         </S.Container>

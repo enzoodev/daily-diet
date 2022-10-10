@@ -62,7 +62,7 @@ const Subtitle = styled.Text`
         font-size: ${theme.FONTS.SIZE.MD}px;
         color: ${theme.COLORS.BASE.GRAY_3};
     `};
-    width: 70%;
+    width: 80%;
     text-align: center;
 `
         

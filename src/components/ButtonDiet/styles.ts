@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components/native";
-import { IsInDietTypeProps } from "src/@types/isInDiet";
+import { IsInDietTypeProps } from "src/@types/meal";
 
 type ButtonDietTypeStyleProps = {
     type: 'PRIMARY' | 'SECONDARY';
