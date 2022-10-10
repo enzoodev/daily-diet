@@ -21,27 +21,18 @@ const Home = () => {
             data: [{title: 'refeição 1', meal: 'descrição da refeição', hour: '08:00', isInDiet: true}]
         } */
     ]);
-
     const navigation = useNavigation();
-
-    const handleNewMeal = () => {
-        navigation.navigate('newMeal');
+    
+    const handleScreens = {
+        newMeal: () => navigation.navigate('newMeal'),
+        statistics: () => navigation.navigate('statistics'),
+        meal: () => navigation.navigate('meal')
     }
 
-    const handleStatistics = () => {
-        navigation.navigate('statistics');
-    }
-
-    const handleGoToMeal = () => {
-        navigation.navigate('meal');
-    }
-
-    const fetchDaysOfDiet = async () => {
+    const fetchDaysOfDiet = async() => {
         try{
             const data = await daysOfDietGetAll();
-            console.log(JSON.stringify(data[0]));
-            console.log(data[0]);
-            /* setList([...list, data[0]]); */
+            setList([data[0]]);
         }
         catch(error){
             console.log(error);
@@ -61,7 +52,7 @@ const Home = () => {
                 icon='arrow-top-right'
                 sideOfIcon='RIGHT'
                 style={{ height: 102 }}
-                onFunction={handleStatistics}
+                onFunction={handleScreens.statistics}
             />
             <S.ContentButton>
                 <S.TitleContentButton>
@@ -71,19 +62,19 @@ const Home = () => {
                     title='Nova refeição'
                     icon='add'
                     type='DARK'
-                    onPress={handleNewMeal}
+                    onPress={handleScreens.newMeal}
                 />
             </S.ContentButton>
            <SectionList
                 sections={list}
-                keyExtractor={(item, index) => item.hour + index}
+                keyExtractor={(item, index) => item + index}
                 renderItem={({ item }) => (
                     <ListItem
                         title={item.title}
                         meal={item.meal}
                         hour={item.hour}
                         isInDiet={item.isInDiet}
-                        onPress={handleGoToMeal}
+                        onPress={handleScreens.meal}
                     />
                 )}
                 renderSectionHeader={({ section: { date } }) => (

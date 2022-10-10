@@ -1,14 +1,20 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AppError } from "@utils/AppError";
 import { MealListTypeProps } from "src/@types/mealList";
 import { DAYSOFDIET_COLLECTION } from "../storageConfig";
 import daysOfDietGetAll from "./daysOfDietGetAll";
 
 type Props = MealListTypeProps;
 
-const dayOfDietCreate = async (meal: Props) => {
-    try{
+const dayOfDietCreate = async (newMeal: Props) => {
+    try{        
         const storedDaysOfDiet = await daysOfDietGetAll();
-        const storage = JSON.stringify([...storedDaysOfDiet, meal]);
+
+        const dayOfDietAlreadyExists = storedDaysOfDiet.includes(newMeal);
+        console.log(dayOfDietAlreadyExists)
+        if(dayOfDietAlreadyExists) throw new AppError('Já existe um grupo cadastrado com esse nome');
+
+        const storage = JSON.stringify([...storedDaysOfDiet, newMeal]);
         await AsyncStorage.setItem(DAYSOFDIET_COLLECTION, storage);
     }
     catch(error){

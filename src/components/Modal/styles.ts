@@ -53,7 +53,7 @@ const Title = styled.Text`
         font-size: ${theme.FONTS.SIZE.LG}px;
         color: ${theme.COLORS.BASE.GRAY_1};
     `};
-    margin-bottom:5px;
+    margin-bottom: 8px;
 `
 
 const Subtitle = styled.Text`

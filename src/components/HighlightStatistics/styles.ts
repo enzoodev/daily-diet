@@ -9,7 +9,7 @@ type HighlightStatisticsTypeStyleProps = {
 
 const Container = styled.View<Props>`
     padding: 20px;
-    margin: 10px 0;
+    margin: 2% 0;
     border-radius: 6px;
     justify-content: center;
     align-items: center;

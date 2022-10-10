@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 import { MealListTypeProps } from 'src/@types/mealList';
+import { AuthenticateDataTypeProps } from 'src/@types/authenticateData';
+import { AppError } from '@utils/AppError';
 import dayOfDietCreate from '@storage/date/dayOfDietCreate';
 import MiniHighlight from '@components/MiniHighlight';
 import Input from '@components/Input';
@@ -9,6 +12,7 @@ import ButtonDiet from '@components/ButtonDiet';
 import Button from '@components/Button';
 import Modal from '@components/Modal';
 import * as S from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Props = {
     highlightTitle: string;
@@ -26,24 +30,36 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
         }]
     });
     const [viewModal, setViewModal] = useState<boolean>(false);
+    const [subtitleModal, setSubtitleModal] = useState<string>('');
     const navigation = useNavigation();
 
     const authenticateData = () => {
-        const properties: any[] = Object.values(meal.data[0]);
-        const nullProperties: boolean = properties.filter((item) => item === '' || item === undefined).length > 0;
-        const authenticatedDate: boolean = meal.date.length === 10;
-        const authenticatedHour: boolean = meal.data[0].hour.length === 5;
-        const authenticatedData: boolean = !nullProperties && authenticatedDate && authenticatedHour;
+        const authenticate: AuthenticateDataTypeProps = {
+            date: meal.date.length === 10,
+            hour: meal.data[0].hour.length === 5,
+            title: meal.data[0].title.length > 0,
+            meal: meal.data[0].meal.length > 0,
+            isInDiet: meal.data[0].isInDiet !== undefined
+        }
+        const unauthenticatedData: boolean[] = Object.values(authenticate).filter((item) => item === false);
+        const authenticatedData: boolean = unauthenticatedData.length === 0;     
         return authenticatedData;
     }
 
     const handleRegisterMeal = async () => {
         try{
-            if(!authenticateData()) return setViewModal(true);
-            await dayOfDietCreate(meal);
-            navigation.navigate('feedback', {isInDiet: meal.data[0].isInDiet});
+            if(authenticateData()) {
+                await dayOfDietCreate(meal);
+                navigation.navigate('feedback', {isInDiet: meal.data[0].isInDiet});
+            }
+            else{
+                setViewModal(true);
+                setSubtitleModal('Preencha corretamente todos os campos');
+            }
         }
         catch(error){
+            if(error instanceof AppError) return Alert.alert('Nova refeição', error.message);
+            Alert.alert('Nova refeição', 'Não foi posível cadastrar a refeição');
             console.log(error);
         }
     }
@@ -115,7 +131,7 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
             <Modal
                 isVisible={viewModal}
                 title='Nova Refeição'
-                subtitle='Preencha corretamente todos os campos'
+                subtitle={subtitleModal}
                 numberOfButtons={1}
                 type='DARK'
                 buttonTitle='Ok'
