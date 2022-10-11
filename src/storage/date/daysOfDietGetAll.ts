@@ -4,7 +4,7 @@ import { DAYSOFDIET_COLLECTION } from "../storageConfig";
 const daysOfDietGetAll = async () => {
     try{
         const storage = await AsyncStorage.getItem(DAYSOFDIET_COLLECTION);
-        const daysOfDiet: any[] = storage ? JSON.parse(storage) : [];
+        const daysOfDiet = storage ? JSON.parse(storage) : [];
         return daysOfDiet;
     }
     catch(error){

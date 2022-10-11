@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native'
-import { NewMealTypeProps } from 'src/@types/meal';
+import { MealListTypeProps } from 'src/@types/meal';
 import { AuthenticateDataTypeProps } from 'src/@types/authenticateData';
 import { AppError } from '@utils/AppError';
 import dayOfDietCreate from '@storage/date/dayOfDietCreate';
@@ -18,14 +18,14 @@ type Props = {
 }
 
 const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
-    const [meal, setMeal] = useState<NewMealTypeProps>({
+    const [meal, setMeal] = useState<MealListTypeProps>({
         date: '',
-        data: {
+        data: [{
             title: '',
             meal: '',
             hour: '',
             isInDiet: undefined
-        }
+        }]
     });
     const [viewModal, setViewModal] = useState<boolean>(false);
     const [subtitleModal, setSubtitleModal] = useState<string>('');
@@ -34,10 +34,10 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
     const authenticateData = () => {
         const authenticate: AuthenticateDataTypeProps = {
             date: meal.date.length === 10,
-            hour: meal.data.hour.length === 5,
-            title: meal.data.title.trim().length > 0,
-            meal: meal.data.meal.trim().length > 0,
-            isInDiet: meal.data.isInDiet !== undefined
+            hour: meal.data[0].hour.length === 5,
+            title: meal.data[0].title.trim().length > 0,
+            meal: meal.data[0].meal.trim().length > 0,
+            isInDiet: meal.data[0].isInDiet !== undefined
         }
         const unauthenticatedData: boolean[] = Object.values(authenticate).filter((item) => item === false);
         const authenticatedData: boolean = unauthenticatedData.length === 0;     
@@ -48,7 +48,7 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
         try{
             if(authenticateData()) {
                 await dayOfDietCreate(meal);
-                /* navigation.navigate('feedback', {isInDiet: meal.data.isInDiet}); */
+                /* navigation.navigate('feedback', {isInDiet: meal.data[0].isInDiet}); */
             }
             else{
                 setViewModal(true);
@@ -80,8 +80,8 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
                         title={'Nome'}
                         maxLength={40}
                         style={{ height: 48 }}
-                        value={meal.data.title}
-                        onChangeText={(text) => setMeal({ date: meal.date, data: {...meal.data, title: text} })}
+                        value={meal.data[0].title}
+                        onChangeText={(text) => setMeal({ date: meal.date, data: [{...meal.data[0], title: text}] })}
                     />
                     <Input
                         title={'Descrição'}
@@ -89,8 +89,8 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
                         textAlignVertical={'top'} /* compatibility for Android */
                         maxLength={220}
                         style={{ height: 120 }}
-                        value={meal.data.meal}
-                        onChangeText={(text) => setMeal({ date: meal.date, data: {...meal.data, meal: text} })}
+                        value={meal.data[0].meal}
+                        onChangeText={(text) => setMeal({ date: meal.date, data: [{...meal.data[0], meal: text}] })}
                     />
                     <S.MiniContainer>
                         <InputMasked    
@@ -104,8 +104,8 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
                             title={'Hora'}
                             type='datetime'
                             options={{ format: 'HH:mm' }}
-                            value={meal.data.hour}
-                            onChangeText={(text) => setMeal({ date: meal.date, data: {...meal.data, hour: text} })}
+                            value={meal.data[0].hour}
+                            onChangeText={(text) => setMeal({ date: meal.date, data: [{...meal.data[0], hour: text}] })}
                         />
                     </S.MiniContainer>
                     <S.HeaderButtonsDiet>
@@ -115,14 +115,14 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
                         <ButtonDiet
                             title='Sim'
                             type='PRIMARY'
-                            isActive={meal.data.isInDiet === undefined ? undefined : meal.data.isInDiet}
-                            onPress={() => setMeal({ date: meal.date, data: {...meal.data, isInDiet: true} })}
+                            isActive={meal.data[0].isInDiet === undefined ? undefined : meal.data[0].isInDiet}
+                            onPress={() => setMeal({ date: meal.date, data: [{...meal.data[0], isInDiet: true}] })}
                         />
                         <ButtonDiet
                             title='Não'
                             type='SECONDARY'
-                            isActive={meal.data.isInDiet === undefined ? undefined : !meal.data.isInDiet}
-                            onPress={() => setMeal({ date: meal.date, data: {...meal.data, isInDiet: false} })}
+                            isActive={meal.data[0].isInDiet === undefined ? undefined : !meal.data[0].isInDiet}
+                            onPress={() => setMeal({ date: meal.date, data: [{...meal.data[0], isInDiet: false}] })}
                         />
                     </S.MiniContainer>
                 </S.SubContent>

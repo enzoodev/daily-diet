@@ -4,17 +4,13 @@ type MealTypeProps = {
     title: string;
     meal: string;
     hour: string;
+    date?: string;
     isInDiet: IsInDietTypeProps;
 }
 
-type NewMealTypeProps = {
-    date: string;
-    data: Meal;
-};
-
 type MealListTypeProps = {
     date: string;
-    data: Meal[];
+    data: MealTypeProps[];
 };
 
-export { IsInDietTypeProps, MealTypeProps, NewMealTypeProps, MealListTypeProps };
+export { IsInDietTypeProps, MealTypeProps, MealListTypeProps };

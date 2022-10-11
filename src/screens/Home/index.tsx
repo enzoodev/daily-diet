@@ -10,6 +10,7 @@ import ListItem from '@components/ListItem';
 import ListHeader from '@components/ListHeader';
 import ListEmpty from '@components/ListEmpty';
 import * as S from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Props = MealListTypeProps;
 
@@ -20,11 +21,11 @@ const Home = () => {
     const handleScreens = {
         newMeal: () => navigation.navigate('newMeal'),
         statistics: () => navigation.navigate('statistics'),
-        meal: () => navigation.navigate('meal')
+        meal: (date: any) => navigation.navigate('meal', {meal: date})
     }
 
     const fetchDaysOfDiet = async() => {
-        try{
+        try{[0]
             const data = await daysOfDietGetAll();
             setList(data);
         }
@@ -68,7 +69,8 @@ const Home = () => {
                         meal={item.meal}
                         hour={item.hour}
                         isInDiet={item.isInDiet}
-                        onPress={handleScreens.meal}
+                        /* onPress={handleScreens.meal(item.date)} */
+                        onPress={() => navigation.navigate('meal', {meal: item.date})}
                     />
                 )}
                 renderSectionHeader={({ section: { date } }) => (
