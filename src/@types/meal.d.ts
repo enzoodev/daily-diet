@@ -4,7 +4,6 @@ type MealTypeProps = {
     title: string;
     meal: string;
     hour: string;
-    date?: string;
     isInDiet: IsInDietTypeProps;
 }
 

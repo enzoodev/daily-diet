@@ -48,7 +48,7 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
         try{
             if(authenticateData()) {
                 await dayOfDietCreate(meal);
-                /* navigation.navigate('feedback', {isInDiet: meal.data[0].isInDiet}); */
+                navigation.navigate('feedback', {isInDiet: meal.data[0].isInDiet});
             }
             else{
                 setViewModal(true);
@@ -56,15 +56,9 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
             }
         }
         catch(error){
-            if(error instanceof AppError){
-                
-                setSubtitleModal(error.message);
-            }
-            else{
-            
-                setSubtitleModal('Não foi possível cadastrar a refeição');
-            }
             setViewModal(true);
+            if(error instanceof AppError) return setSubtitleModal(error.message);
+            setSubtitleModal('Não foi possível cadastrar a refeição');
         }
     }
 

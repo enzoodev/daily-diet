@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { SectionList } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import { MealListTypeProps } from 'src/@types/meal';
+import { MealListTypeProps, MealTypeProps } from 'src/@types/meal';
 import daysOfDietGetAll from '@storage/date/daysOfDietGetAll';
 import Header from '@components/Header';
 import Highlight from '@components/Highlight';
@@ -14,18 +14,24 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Props = MealListTypeProps;
 
+type ScreensTypeProps = {
+    newMeal: () => void;
+    statistics: () => void;
+    meal: (date: string, item: MealTypeProps) => void;
+}
+
 const Home = () => {
     const [list, setList] = useState<Props[]>([]);
     const navigation = useNavigation();
     
-    const handleScreens = {
+    const handleScreens: ScreensTypeProps = {
         newMeal: () => navigation.navigate('newMeal'),
         statistics: () => navigation.navigate('statistics'),
-        meal: (date: any) => navigation.navigate('meal', {meal: date})
+        meal: (date, item) => navigation.navigate('meal', {date: date, meal: item})
     }
 
     const fetchDaysOfDiet = async() => {
-        try{[0]
+        try{
             const data = await daysOfDietGetAll();
             setList(data);
         }
@@ -62,15 +68,14 @@ const Home = () => {
             </S.ContentButton>
            <SectionList
                 sections={list}
-                keyExtractor={(item, index) => item + index}
-                renderItem={({ item }) => (
+                keyExtractor={(item, index) => item.hour + index}
+                renderItem={({ item, section: { date } }) => (
                     <ListItem
                         title={item.title}
                         meal={item.meal}
                         hour={item.hour}
                         isInDiet={item.isInDiet}
-                        /* onPress={handleScreens.meal(item.date)} */
-                        onPress={() => navigation.navigate('meal', {meal: item.date})}
+                        onPress={() => handleScreens.meal(date, item)}
                     />
                 )}
                 renderSectionHeader={({ section: { date } }) => (

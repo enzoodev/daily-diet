@@ -1,5 +1,5 @@
 import { useNavigation, useRoute } from '@react-navigation/native'
-import { IsInDietTypeProps } from 'src/@types/isInDiet';
+import { IsInDietTypeProps } from 'src/@types/meal';
 import PositiveIllustration from '@assets/positive/Illustration.png'
 import NegativeIllustration from '@assets/negative/Illustration.png'
 import FeedbackHighlight from '@components/FeedbackHighlight';

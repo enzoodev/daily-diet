@@ -7,6 +7,7 @@ export declare global {
             statistics: undefined;
             newMeal: undefined;
             meal: {
+                date: string;
                 meal: MealTypeProps;
             }
             feedback: {
