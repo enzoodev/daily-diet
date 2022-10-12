@@ -13,6 +13,11 @@ type RouteParams = {
     meal: MealTypeProps;
 }
 
+type ScreensTypeProps = {
+    yesDeleteMeal: () => void;
+    editMeal: (date: string, item: MealTypeProps) => void;
+}
+
 const Meal = () => {
     const [viewModal, setViewModal] = useState<boolean>(false);
 
@@ -20,9 +25,9 @@ const Meal = () => {
     const route = useRoute();
     const { date, meal } = route.params as RouteParams;
 
-    const handleScreens = {
+    const handleScreens: ScreensTypeProps = {
         yesDeleteMeal: () => navigation.navigate('home'),
-        editMeal: () => navigation.navigate('editMeal')
+        editMeal: (date, item) => navigation.navigate('editMeal', {date: date, meal: item})
     }
 
     const handleDeleteMeal = () => {
@@ -52,7 +57,7 @@ const Meal = () => {
                         title='Editar refeição'
                         type='DARK'
                         iconCommunity='lead-pencil'
-                        onPress={handleScreens.editMeal}
+                        onPress={() => handleScreens.editMeal(date, meal)}
                     />
                     <Button
                         title='Excluir refeição'

@@ -10,10 +10,13 @@ export declare global {
                 date: string;
                 meal: MealTypeProps;
             }
+            editMeal: {
+                date: string;
+                meal: MealTypeProps;
+            }
             feedback: {
                 isInDiet: undefined | boolean;
             }
-            editMeal: undefined;
         }
     }
 }

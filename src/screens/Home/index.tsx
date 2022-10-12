@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { SectionList } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { MealListTypeProps, MealTypeProps } from 'src/@types/meal';
-import daysOfDietGetAll from '@storage/date/daysOfDietGetAll';
+import daysOfDietGetAll from '@storage/utils/dayOfDietGetAll';
 import Header from '@components/Header';
 import Highlight from '@components/Highlight';
 import Button from '@components/Button';
@@ -10,7 +10,6 @@ import ListItem from '@components/ListItem';
 import ListHeader from '@components/ListHeader';
 import ListEmpty from '@components/ListEmpty';
 import * as S from './styles';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Props = MealListTypeProps;
 

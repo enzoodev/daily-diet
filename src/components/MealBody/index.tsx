@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native'
-import { MealListTypeProps } from 'src/@types/meal';
+import { MealListTypeProps, MealTypeProps } from 'src/@types/meal';
 import { AuthenticateDataTypeProps } from 'src/@types/authenticateData';
 import { AppError } from '@utils/AppError';
-import dayOfDietCreate from '@storage/date/CreateNewMealAndDayOfDiet';
+import createNewMeal from '@storage/meal/create';
+import editMeal from '@storage/meal/edit';
 import MiniHighlight from '@components/MiniHighlight';
 import Input from '@components/Input';
 import InputMasked from '@components/InputMasked';
@@ -11,14 +12,16 @@ import ButtonDiet from '@components/ButtonDiet';
 import Button from '@components/Button';
 import Modal from '@components/Modal';
 import * as S from './styles';
-import createNewMeal from '@storage/date/createNewMeal';
 
 type Props = {
     highlightTitle: string;
     buttonTitle: string;
+    typeOfFuntion: 'ADD' | 'EDIT';
+    mealForEdit?: MealTypeProps;
+    dateOfMealForEdit?: string;
 }
 
-const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
+const MealBody = ({ highlightTitle, buttonTitle, typeOfFuntion, mealForEdit, dateOfMealForEdit }: Props) => {
     const [meal, setMeal] = useState<MealListTypeProps>({
         date: '',
         data: [{
@@ -48,7 +51,7 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
     const handleRegisterMeal = async () => {
         try{
             if(authenticateData()) {
-                await createNewMeal(meal);
+                typeOfFuntion === 'ADD' ? await createNewMeal(meal) : await editMeal({meal, mealForEdit, dateOfMealForEdit});
                 navigation.navigate('feedback', {isInDiet: meal.data[0].isInDiet});
             }
             else{
@@ -57,9 +60,8 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
             }
         }
         catch(error){
+            setSubtitleModal(error instanceof AppError ? error.message : 'Não foi possível cadastrar a refeição');
             setViewModal(true);
-            if(error instanceof AppError) return setSubtitleModal(error.message);
-            setSubtitleModal('Não foi possível cadastrar a refeição');
         }
     }
 

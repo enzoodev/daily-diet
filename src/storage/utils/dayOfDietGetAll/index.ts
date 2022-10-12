@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { DAYSOFDIET_COLLECTION } from "../storageConfig";
+import { DAYSOFDIET_COLLECTION } from "../../config";
 
 const daysOfDietGetAll = async () => {
     try{

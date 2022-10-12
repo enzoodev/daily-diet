@@ -1,11 +1,11 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { DAYSOFDIET_COLLECTION } from "@storage/storageConfig";
+import { DAYSOFDIET_COLLECTION } from "@storage/config";
 import { MealListTypeProps } from "src/@types/meal";
-import daysOfDietGetAll from "./daysOfDietGetAll";
+import daysOfDietGetAll from "../../../utils/dayOfDietGetAll";
 
 type Props = MealListTypeProps;
 
-const createNewMealByDayOfDiet = async(newMeal: Props) => {
+const newMealByDayOfDiet = async(newMeal: Props) => {
     try{
         const storedMeals = await daysOfDietGetAll();
 
@@ -22,4 +22,4 @@ const createNewMealByDayOfDiet = async(newMeal: Props) => {
     }
 }
 
-export default createNewMealByDayOfDiet;
+export default newMealByDayOfDiet;
