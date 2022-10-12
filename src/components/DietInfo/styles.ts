@@ -1,7 +1,8 @@
 import styled, { css } from "styled-components/native";
+import { IsInDietTypeProps } from "src/@types/meal";
 
 type DietInfoTypeStyleProps = {
-    isInDiet: boolean;
+    isInDiet: IsInDietTypeProps;
 }
 
 type Props = DietInfoTypeStyleProps;

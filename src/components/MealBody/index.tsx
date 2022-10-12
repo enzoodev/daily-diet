@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native'
 import { MealListTypeProps } from 'src/@types/meal';
 import { AuthenticateDataTypeProps } from 'src/@types/authenticateData';
 import { AppError } from '@utils/AppError';
-import dayOfDietCreate from '@storage/date/dayOfDietCreate';
+import dayOfDietCreate from '@storage/date/CreateNewMealAndDayOfDiet';
 import MiniHighlight from '@components/MiniHighlight';
 import Input from '@components/Input';
 import InputMasked from '@components/InputMasked';
@@ -11,6 +11,7 @@ import ButtonDiet from '@components/ButtonDiet';
 import Button from '@components/Button';
 import Modal from '@components/Modal';
 import * as S from './styles';
+import createNewMeal from '@storage/date/createNewMeal';
 
 type Props = {
     highlightTitle: string;
@@ -47,7 +48,7 @@ const MealBody = ({ highlightTitle, buttonTitle }: Props) => {
     const handleRegisterMeal = async () => {
         try{
             if(authenticateData()) {
-                await dayOfDietCreate(meal);
+                await createNewMeal(meal);
                 navigation.navigate('feedback', {isInDiet: meal.data[0].isInDiet});
             }
             else{

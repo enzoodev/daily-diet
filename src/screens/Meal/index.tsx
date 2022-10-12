@@ -27,8 +27,6 @@ const Meal = () => {
 
     const handleDeleteMeal = () => {
         setViewModal(true);
-        console.log(meal);
-        console.log(date);
     }
 
     return(
@@ -40,13 +38,13 @@ const Meal = () => {
             <S.Content>
                 <S.SubContent>
                     <Description
-                        title='Sanduíche'
-                        subtitle='Sanduíche de pao integral com atum e salada de alface e tomate'
-                        date='05/10/2022'
-                        hour='06:49'
+                        title={meal.title}
+                        subtitle={meal.meal}
+                        date={date}
+                        hour={meal.hour}
                     />
                     <DietInfo
-                        isInDiet={true}
+                        isInDiet={meal.isInDiet}
                     />
                 </S.SubContent>
                 <S.SubContent>
