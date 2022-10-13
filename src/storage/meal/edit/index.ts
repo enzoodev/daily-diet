@@ -2,7 +2,7 @@ import dateOfDietAlreadyExists from "@storage/utils/authentication/dateOfDietAlr
 import { AppError } from "@utils/AppError";
 import { MealListTypeProps, MealTypeProps } from "src/@types/meal";
 import mealAlreadyExists from "../../utils/authentication/mealAlreadyExists";
-import mealOfDayOfDiet from "./mealOfDayOfDite";
+import mealOfDayOfDiet from "./mealOfDayOfDiet";
 import uniqueMealOfDayOfDiet from "./uniqueMealOfDayOfDiet";
 
 type Props = {
@@ -22,7 +22,7 @@ const editMeal = async({meal, mealForEdit, dateOfMealForEdit}: Props) => {
         }
     
         const isDateOfDietAlreadyExists = await dateOfDietAlreadyExists(meal);
-        if(isDateOfDietAlreadyExists) {return await uniqueMealOfDayOfDiet({meal, editedMeal})}
+        if(isDateOfDietAlreadyExists) return await uniqueMealOfDayOfDiet({meal, editedMeal})
         await mealOfDayOfDiet({meal, editedMeal});
     }
     catch(error){

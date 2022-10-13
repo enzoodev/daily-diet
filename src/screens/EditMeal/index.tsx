@@ -1,6 +1,6 @@
 import { useRoute } from '@react-navigation/native'
-import { MealTypeProps } from 'src/@types/meal';
 import MealBody from '@components/MealBody';
+import { MealTypeProps } from 'src/@types/meal';
 
 type RouteParams = {
     date: string;

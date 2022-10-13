@@ -1,21 +1,17 @@
 import { useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { MealTypeProps } from 'src/@types/meal';
+import { MealListTypeProps, MealTypeProps } from 'src/@types/meal';
 import MiniHighlight from '@components/MiniHighlight';
 import Description from '@components/Description';
 import DietInfo from '@components/DietInfo';
 import Button from '@components/Button';
 import Modal from '@components/Modal';
 import * as S from './styles';
+import deleteMeal from '@storage/meal/delete';
 
 type RouteParams = {
     date: string;
     meal: MealTypeProps;
-}
-
-type ScreensTypeProps = {
-    yesDeleteMeal: () => void;
-    editMeal: (date: string, item: MealTypeProps) => void;
 }
 
 const Meal = () => {
@@ -25,13 +21,30 @@ const Meal = () => {
     const route = useRoute();
     const { date, meal } = route.params as RouteParams;
 
-    const handleScreens: ScreensTypeProps = {
-        yesDeleteMeal: () => navigation.navigate('home'),
-        editMeal: (date, item) => navigation.navigate('editMeal', {date: date, meal: item})
+    const mealForDelete: MealListTypeProps = {
+        date: date,
+        data: [meal]
     }
 
-    const handleDeleteMeal = () => {
-        setViewModal(true);
+    const handleEditMeal = (date: string, item: MealTypeProps) => {
+        navigation.navigate('editMeal', {date: date, meal: item});
+    }
+
+    const handleDeleteMeal = {
+        init: () => setViewModal(true),
+        no: () => setViewModal(false),
+        yes: async() => {
+            try{
+                await deleteMeal(mealForDelete);
+                /* navigation.navigate('home'); */
+            }
+            catch(error){
+                console.log(error);
+            }
+        }
+    }
+    const tt = async(mealForDelete: any) => {
+        await deleteMeal(mealForDelete);
     }
 
     return(
@@ -57,14 +70,14 @@ const Meal = () => {
                         title='Editar refeição'
                         type='DARK'
                         iconCommunity='lead-pencil'
-                        onPress={() => handleScreens.editMeal(date, meal)}
+                        onPress={() => handleEditMeal(date, meal)}
                     />
                     <Button
                         title='Excluir refeição'
                         type='LIGHT'
                         iconCommunity='trash-can'
                         style={{ marginTop: 10 }}
-                        onPress={handleDeleteMeal}
+                        onPress={handleDeleteMeal.init}
                     />
                 </S.SubContent>
             </S.Content>
@@ -77,8 +90,8 @@ const Meal = () => {
                 typeTwo='DARK'
                 buttonTitle='Cancelar'
                 buttonTitleTwo='Sim, excluir'
-                onFunction={() => setViewModal(false)}
-                onFunctionTwo={handleScreens.yesDeleteMeal}
+                onFunction={handleDeleteMeal.no}
+                onFunctionTwo={handleDeleteMeal.yes}
             />
         </S.Container>
     )

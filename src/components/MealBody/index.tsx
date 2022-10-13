@@ -23,14 +23,21 @@ type Props = {
 
 const MealBody = ({ highlightTitle, buttonTitle, typeOfFuntion, mealForEdit, dateOfMealForEdit }: Props) => {
     const [meal, setMeal] = useState<MealListTypeProps>({
-        date: '',
-        data: [{
+        date: dateOfMealForEdit ? dateOfMealForEdit : '',
+        data: mealForEdit ?
+        [{
+            title: mealForEdit.title,
+            meal: mealForEdit.meal,
+            hour: mealForEdit.hour,
+            isInDiet: mealForEdit.isInDiet
+        }] : [{
             title: '',
             meal: '',
             hour: '',
             isInDiet: undefined
         }]
     });
+    
     const [viewModal, setViewModal] = useState<boolean>(false);
     const [subtitleModal, setSubtitleModal] = useState<string>('');
     const navigation = useNavigation();
@@ -48,7 +55,7 @@ const MealBody = ({ highlightTitle, buttonTitle, typeOfFuntion, mealForEdit, dat
         return authenticatedData;
     }
 
-    const handleRegisterMeal = async () => {
+    const handleRegisterMeal = async() => {
         try{
             if(authenticateData()) {
                 typeOfFuntion === 'ADD' ? await createNewMeal(meal) : await editMeal({meal, mealForEdit, dateOfMealForEdit});

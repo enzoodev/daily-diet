@@ -1,10 +1,8 @@
 import { StatusBar } from 'react-native';
 import { ThemeProvider } from 'styled-components/native';
-import theme from './src/theme';
 import { useFonts, NunitoSans_400Regular, NunitoSans_700Bold } from '@expo-google-fonts/nunito-sans';
-
+import theme from './src/theme';
 import Routes from './src/routes';
-
 import Loading from '@components/Loading';
 
 const App = () => {

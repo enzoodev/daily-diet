@@ -5,7 +5,7 @@ import daysOfDietGetAll from "@storage/utils/dayOfDietGetAll";
 
 type Props = {
     meal: MealListTypeProps;
-    editedMeal: any
+    editedMeal: any;
 }
 
 const uniqueMealOfDayOfDiet = async({meal, editedMeal}: Props) => {
