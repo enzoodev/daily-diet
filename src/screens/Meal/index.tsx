@@ -14,6 +14,14 @@ type RouteParams = {
     meal: MealTypeProps;
 }
 
+type EditMealTypeProps = (date: string, item: MealTypeProps) => void;
+
+type DeleteMealTypeProps = {
+    init: () => void;
+    no: () => void;
+    yes: () => Promise<void>;
+}
+
 const Meal = () => {
     const [viewModal, setViewModal] = useState<boolean>(false);
 
@@ -26,11 +34,11 @@ const Meal = () => {
         data: [meal]
     }
 
-    const handleEditMeal = (date: string, item: MealTypeProps) => {
+    const handleEditMeal: EditMealTypeProps = (date, item) => {
         navigation.navigate('editMeal', {date: date, meal: item});
     }
 
-    const handleDeleteMeal = {
+    const handleDeleteMeal: DeleteMealTypeProps = {
         init: () => setViewModal(true),
         no: () => setViewModal(false),
         yes: async() => {
@@ -42,9 +50,6 @@ const Meal = () => {
                 console.log(error);
             }
         }
-    }
-    const tt = async(mealForDelete: any) => {
-        await deleteMeal(mealForDelete);
     }
 
     return(
