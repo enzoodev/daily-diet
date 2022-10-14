@@ -1,17 +1,15 @@
-import { AppError } from "@utils/AppError";
 import { MealListTypeProps } from "src/@types/meal";
-import mealAlreadyExists from "../../utils/authentication/mealAlreadyExists";
-import dateOfDietAlreadyExists from "@storage/utils/authentication/dateOfDietAlreadyExists";
 import mealByDayOfDiet from "./mealByDayOfDiet";
 import mealAndDayOfDiet from "./mealAndDayOfDiet";
+import mealIsAUniqueMealOfTheDay from "@storage/utils/authentication/mealIsAUniqueMealOfTheDay";
 
-type Props = MealListTypeProps;
+type Props = (meal: MealListTypeProps) => Promise<void>;
 
-const deleteMeal = async(meal: Props) => {
+const deleteMeal: Props = async(meal) => {
     try{        
-        const isDateOfDietAlreadyExists = await dateOfDietAlreadyExists(meal);
-        if(isDateOfDietAlreadyExists) return await mealByDayOfDiet(meal);
-        await mealAndDayOfDiet(meal);
+        const isMealIsAUniqueMealOfTheDay = await mealIsAUniqueMealOfTheDay(meal);
+        if(isMealIsAUniqueMealOfTheDay) return await mealAndDayOfDiet(meal);
+        await mealByDayOfDiet(meal);
     }
     catch(error){
         throw error;

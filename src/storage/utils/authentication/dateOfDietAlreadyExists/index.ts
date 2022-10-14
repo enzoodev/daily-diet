@@ -1,14 +1,15 @@
 import { MealListTypeProps } from "src/@types/meal";
 import daysOfDietGetAll from "../../dayOfDietGetAll";
 
-type Props = MealListTypeProps;
+type Props = (meal: MealListTypeProps) => Promise<boolean>;
 
-const dateOfDietAlreadyExists = async(meal: Props) => {
+const dateOfDietAlreadyExists: Props = async(meal) => {
     try{{
         const storedDaysOfDiet = await daysOfDietGetAll();
 
-        const dateOfDaysOfDiet: string[] = storedDaysOfDiet.map(({ date }: Props) => date);
+        const dateOfDaysOfDiet: string[] = storedDaysOfDiet.map(({ date }: any) => date);
         const dateOfNewMealAlreadyExists: boolean = dateOfDaysOfDiet.includes(meal.date);
+
         return dateOfNewMealAlreadyExists;
     }}
     catch(error){
