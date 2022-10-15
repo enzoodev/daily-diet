@@ -7,7 +7,8 @@ type Props = (meal: MealListTypeProps) => Promise<void>;
 
 const deleteMeal: Props = async(meal) => {
     try{        
-        const isMealIsAUniqueMealOfTheDay = await mealIsAUniqueMealOfTheDay(meal);
+        const isMealIsAUniqueMealOfTheDay: boolean = await mealIsAUniqueMealOfTheDay(meal);
+
         if(isMealIsAUniqueMealOfTheDay) return await mealAndDayOfDiet(meal);
         await mealByDayOfDiet(meal);
     }

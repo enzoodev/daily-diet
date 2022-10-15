@@ -14,8 +14,7 @@ const mealAndDayOfDiet: Props = async(meal) => {
         })
 
         const storage: string = JSON.stringify(excludeMeal);
-        console.log('see and day');
-        /* await AsyncStorage.setItem(DAYSOFDIET_COLLECTION, storage); */
+        await AsyncStorage.setItem(DAYSOFDIET_COLLECTION, storage);
     }
     catch(error){
         throw error;

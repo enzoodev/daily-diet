@@ -9,21 +9,17 @@ const mealByDayOfDiet: Props = async(meal) => {
     try{
         const storedMeals = await daysOfDietGetAll();
 
-        const localizeMeal: MealListTypeProps[] = storedMeals.filter((item: MealListTypeProps) => item.date === meal.date);
-        const updateDayOfDiet = localizeMeal[0].data.filter((item : MealTypeProps) => {
-            console.log(JSON.stringify(item) === JSON.stringify(meal.data[0]));
-            console.log(item === meal.data[0]);
-        })
-/*         console.log(localizeMeal[0].data[0]);
-        console.log(meal.data[0]); */
+        const localizeMeal: MealListTypeProps = storedMeals.find((item: MealListTypeProps) => item.date === meal.date);
+        const unalteredDaysOfDiet: MealListTypeProps[] = storedMeals.filter((item: MealListTypeProps) => item.date !== meal.date);
 
-        const excludeMeal: MealListTypeProps[] = storedMeals.map((item : MealListTypeProps) => {
-/*             if(item.date === meal.date) */
-            return item;
+        const excludeMeal: MealTypeProps[] = localizeMeal.data.filter((item: MealTypeProps) => {
+            return JSON.stringify(item) !== JSON.stringify(meal.data[0]);
         })
+        
+        const actualizedDayOfDiet: MealListTypeProps[] = [{ date: localizeMeal.date, data: excludeMeal }, ...unalteredDaysOfDiet];
 
-        const storage: string = JSON.stringify(excludeMeal);
-        /* await AsyncStorage.setItem(DAYSOFDIET_COLLECTION, storage); */
+        const storage: string = JSON.stringify(actualizedDayOfDiet);
+        await AsyncStorage.setItem(DAYSOFDIET_COLLECTION, storage);
     }
     catch(error){
         throw error;
