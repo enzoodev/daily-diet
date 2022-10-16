@@ -69,6 +69,7 @@ const MealBody = ({ highlightTitle, buttonTitle, typeOfFuntion, mealForEdit, dat
         catch(error){
             setSubtitleModal(error instanceof AppError ? error.message : 'Não foi possível cadastrar a refeição');
             setViewModal(true);
+            console.log(error);
         }
     }
 

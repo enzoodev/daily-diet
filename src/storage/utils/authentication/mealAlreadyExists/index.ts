@@ -1,13 +1,28 @@
 import { MealListTypeProps } from "src/@types/meal";
 import daysOfDietGetAll from "../../dayOfDietGetAll";
+import dateOfDietAlreadyExists from "../dateOfDietAlreadyExists";
+import mealIsAUniqueMealOfTheDay from "../mealIsAUniqueMealOfTheDay";
 
-type Props = MealListTypeProps;
+type Props = (meal: MealListTypeProps) => Promise<boolean>;
 
-const mealAlreadyExists = async(meal: Props) => {
+const mealAlreadyExists: Props = async(meal) => {
     try{
-        const storedMeals: string = JSON.stringify(await daysOfDietGetAll());
+        const storedMeals = await daysOfDietGetAll();
+        let isMealAlreadyExists: boolean;
 
-        const isMealAlreadyExists: boolean = storedMeals.includes(JSON.stringify(meal));
+        const index: number = storedMeals.findIndex((item: MealListTypeProps) => item.date === meal.date);
+        const isDateOfDietAlreadyExists = await dateOfDietAlreadyExists(meal);
+
+        if(isDateOfDietAlreadyExists){
+            const isMealIsAUniqueMealOfTheDay: boolean = await mealIsAUniqueMealOfTheDay(meal);
+
+            if(isMealIsAUniqueMealOfTheDay) isMealAlreadyExists = JSON.stringify(storedMeals).includes(JSON.stringify(meal));
+            else isMealAlreadyExists =
+            storedMeals[index].date === meal.date && 
+            JSON.stringify(storedMeals[index].data).includes(JSON.stringify(meal.data[0]));
+        }
+        else isMealAlreadyExists = false;
+
         return isMealAlreadyExists;
     }
     catch(error){

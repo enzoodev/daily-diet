@@ -10,7 +10,7 @@ const deleteMeal: Props = async(meal) => {
     try{        
         let storedMeals = await daysOfDietGetAll();
 
-        const indexOfExcludedMeal: number = storedMeals.findIndex((item: MealListTypeProps) => item.date === meal.date);
+        const indexOfTheExcludedMeal: number = storedMeals.findIndex((item: MealListTypeProps) => item.date === meal.date);
         const isMealIsAUniqueMealOfTheDay: boolean = await mealIsAUniqueMealOfTheDay(meal);
 
         if(isMealIsAUniqueMealOfTheDay) {
@@ -19,7 +19,7 @@ const deleteMeal: Props = async(meal) => {
             })
         }
         else{
-            storedMeals[indexOfExcludedMeal].data = storedMeals[indexOfExcludedMeal].data.filter((item: MealTypeProps) => {
+            storedMeals[indexOfTheExcludedMeal].data = storedMeals[indexOfTheExcludedMeal].data.filter((item: MealTypeProps) => {
                 return JSON.stringify(item) !== JSON.stringify(meal.data[0]);
             })    
         }

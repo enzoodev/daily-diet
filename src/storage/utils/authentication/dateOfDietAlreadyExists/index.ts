@@ -7,7 +7,7 @@ const dateOfDietAlreadyExists: Props = async(meal) => {
     try{{
         const storedDaysOfDiet = await daysOfDietGetAll();
 
-        const dateOfDaysOfDiet: string[] = storedDaysOfDiet.map(({ date }: any) => date);
+        const dateOfDaysOfDiet: string[] = storedDaysOfDiet.map((item: MealListTypeProps) => item.date);
         const dateOfNewMealAlreadyExists: boolean = dateOfDaysOfDiet.includes(meal.date);
 
         return dateOfNewMealAlreadyExists;
