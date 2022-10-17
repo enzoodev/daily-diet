@@ -1,14 +1,25 @@
-import { useNavigation } from '@react-navigation/native';
+import { useState, useCallback } from 'react';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import Highlight from '@components/Highlight';
 import HighLightStatistics from '@components/HighlightStatistics';
 import * as S from './styles';
 
 const Statistics = () => {
     const navigation = useNavigation();
+    const handleGoBack = () => navigation.goBack();
 
-    const handleGoBack = () => {
-        navigation.goBack();
-    }
+    const fetchStatistics: () => Promise<void> = async() => {
+        try{
+            console.log('testing');
+        }
+        catch(error){
+            console.log(error);
+        }
+    } 
+
+    useFocusEffect(useCallback(() => {
+        fetchStatistics();
+    }, []))
 
     return(
         <S.Container>

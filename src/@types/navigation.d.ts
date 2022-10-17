@@ -1,4 +1,4 @@
-import { MealTypeProps } from "./meal";
+import { MealListTypeProps } from "./meal";
 
 export declare global {
     namespace ReactNavigation {
@@ -6,13 +6,11 @@ export declare global {
             home: undefined;
             statistics: undefined;
             newMeal: undefined;
-            meal: {
-                date: string;
-                meal: MealTypeProps;
-            }
             editMeal: {
-                date: string;
-                meal: MealTypeProps;
+                meal: MealListTypeProps;
+            }
+            meal: {
+                meal: MealListTypeProps;
             }
             feedback: {
                 isInDiet: undefined | boolean;

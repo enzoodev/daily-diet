@@ -26,10 +26,10 @@ const Home = () => {
     const handleScreens: ScreensTypeProps = {
         newMeal: () => navigation.navigate('newMeal'),
         statistics: () => navigation.navigate('statistics'),
-        meal: (date, item) => navigation.navigate('meal', {date: date, meal: item})
+        meal: (date, item) => navigation.navigate('meal', {meal: {date: date, data: [item]}})
     }
 
-    const fetchDaysOfDiet = async() => {
+    const fetchDaysOfDiet: () => Promise<void> = async() => {
         try{
             const data = await daysOfDietGetAll();
             setList(data);
@@ -82,7 +82,7 @@ const Home = () => {
                         title={date}
                     />
                 )}
-                ListEmptyComponent = {() => (
+                ListEmptyComponent={() => (
                     <ListEmpty
                         message='Adicione as refeições diárias'
                     />

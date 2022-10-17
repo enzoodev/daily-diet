@@ -1,15 +1,14 @@
 import { useRoute } from '@react-navigation/native'
 import MealBody from '@components/MealBody';
-import { MealTypeProps } from 'src/@types/meal';
+import { MealListTypeProps } from 'src/@types/meal';
 
 type RouteParams = {
-    date: string;
-    meal: MealTypeProps;
+    meal: MealListTypeProps
 }
 
 const EditMeal = () => {
     const route = useRoute();
-    const { date, meal } = route.params as RouteParams;
+    const { meal } = route.params as RouteParams;
 
     return(
         <MealBody
@@ -17,7 +16,6 @@ const EditMeal = () => {
             buttonTitle='Salvar alterações'
             typeOfFuntion='EDIT'
             mealForEdit={meal}
-            dateOfMealForEdit={date}
         />
     )
 }

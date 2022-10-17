@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native'
-import { MealListTypeProps, MealTypeProps } from 'src/@types/meal';
+import { MealListTypeProps } from 'src/@types/meal';
 import { AuthenticateDataTypeProps } from 'src/@types/authenticateData';
 import { AppError } from '@utils/AppError';
 import createNewMeal from '@storage/meal/create';
@@ -17,19 +17,18 @@ type Props = {
     highlightTitle: string;
     buttonTitle: string;
     typeOfFuntion: 'ADD' | 'EDIT';
-    mealForEdit?: MealTypeProps;
-    dateOfMealForEdit?: string;
+    mealForEdit?: MealListTypeProps;
 }
 
-const MealBody = ({ highlightTitle, buttonTitle, typeOfFuntion, mealForEdit, dateOfMealForEdit }: Props) => {
+const MealBody = ({ highlightTitle, buttonTitle, typeOfFuntion, mealForEdit }: Props) => {
     const [meal, setMeal] = useState<MealListTypeProps>({
-        date: dateOfMealForEdit ? dateOfMealForEdit : '',
+        date: mealForEdit ? mealForEdit.date : '',
         data: mealForEdit ?
         [{
-            title: mealForEdit.title,
-            meal: mealForEdit.meal,
-            hour: mealForEdit.hour,
-            isInDiet: mealForEdit.isInDiet
+            title: mealForEdit.data[0].title,
+            meal: mealForEdit.data[0].meal,
+            hour: mealForEdit.data[0].hour,
+            isInDiet: mealForEdit.data[0].isInDiet
         }] : [{
             title: '',
             meal: '',
@@ -58,7 +57,7 @@ const MealBody = ({ highlightTitle, buttonTitle, typeOfFuntion, mealForEdit, dat
     const handleRegisterMeal = async() => {
         try{
             if(authenticateData()) {
-                typeOfFuntion === 'ADD' ? await createNewMeal(meal) : await editMeal({meal, mealForEdit, dateOfMealForEdit});
+                typeOfFuntion === 'ADD' ? await createNewMeal(meal) : await editMeal(meal, mealForEdit);
                 navigation.navigate('feedback', {isInDiet: meal.data[0].isInDiet});
             }
             else{
