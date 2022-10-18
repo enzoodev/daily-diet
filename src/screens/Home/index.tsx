@@ -25,8 +25,8 @@ const Home = () => {
     
     const handleScreens: ScreensTypeProps = {
         newMeal: () => navigation.navigate('newMeal'),
-        statistics: () => navigation.navigate('statistics'),
-        meal: (date, item) => navigation.navigate('meal', {meal: {date: date, data: [item]}})
+        statistics: () => navigation.navigate('statistics', { data: list }),
+        meal: (date, item) => navigation.navigate('meal', { meal: {date: date, data: [item]} })
     }
 
     const fetchDaysOfDiet: () => Promise<void> = async() => {

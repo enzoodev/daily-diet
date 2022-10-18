@@ -1,30 +1,39 @@
-import { useState, useCallback } from 'react';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { MealListTypeProps } from 'src/@types/meal';
 import Highlight from '@components/Highlight';
 import HighLightStatistics from '@components/HighlightStatistics';
 import * as S from './styles';
 
+type Props = {
+    percenterOfMealsInOutDiet: number;
+    maxStreakOfMealsInOutDiet: number;
+    registredMeals: number;
+    mealsInOfDiet: number;
+    mealsOutOfDiet: number;
+}
+
+type RouteParams = {
+    meal: MealListTypeProps[];
+}
+
 const Statistics = () => {
+    const route = useRoute();
     const navigation = useNavigation();
+    const { meal } = route.params as RouteParams;
     const handleGoBack = () => navigation.goBack();
 
-    const fetchStatistics: () => Promise<void> = async() => {
-        try{
-            console.log('testing');
-        }
-        catch(error){
-            console.log(error);
-        }
-    } 
-
-    useFocusEffect(useCallback(() => {
-        fetchStatistics();
-    }, []))
+    const statisticsOfMeals: Props = {
+        percenterOfMealsInOutDiet: 1,
+        maxStreakOfMealsInOutDiet: 2,
+        registredMeals: 3,
+        mealsInOfDiet: 4,
+        mealsOutOfDiet: 5 
+    }
 
     return(
         <S.Container>
             <Highlight
-                title={90.86}
+                title={statisticsOfMeals.percenterOfMealsInOutDiet}
                 type='PRIMARY'
                 icon='arrow-left'
                 sideOfIcon='LEFT'
@@ -36,26 +45,26 @@ const Statistics = () => {
                     Estatísticas gerais   
                  </S.Title>
                 <HighLightStatistics
-                    title={22}
+                    title={statisticsOfMeals.maxStreakOfMealsInOutDiet}
                     subtitle='melhor sequência de pratos dentro da dieta'
                     type='DEFAULT'
                     isComplete={true}
                 />
                 <HighLightStatistics
-                    title={109}
+                    title={statisticsOfMeals.registredMeals}
                     subtitle='refeições registradas'
                     type='DEFAULT'
                     isComplete={true}
                 />
                 <S.MiniContainer>
                     <HighLightStatistics
-                        title={99}
+                        title={statisticsOfMeals.mealsInOfDiet}
                         subtitle='refeições dentro da dieta'
                         type='PRIMARY'
                         isComplete={false}
                     />
                     <HighLightStatistics
-                        title={10}
+                        title={statisticsOfMeals.mealsOutOfDiet}
                         subtitle='refeições fora da dieta'
                         type='SECONDARY'
                         isComplete={false}
