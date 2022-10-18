@@ -36,7 +36,7 @@ const Meal = () => {
             yes: async() => {
                 try{
                     await deleteMeal(meal);
-                    /* navigation.navigate('home'); */
+                    navigation.navigate('home');
                 }
                 catch(error){
                     console.log(error);

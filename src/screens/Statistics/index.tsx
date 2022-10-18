@@ -1,39 +1,65 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { MealListTypeProps } from 'src/@types/meal';
+import { useState, useCallback } from 'react';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { IsInDietTypeProps, MealListTypeProps, MealTypeProps } from 'src/@types/meal';
+import daysOfDietGetAll from '@storage/utils/dayOfDietGetAll';
 import Highlight from '@components/Highlight';
 import HighLightStatistics from '@components/HighlightStatistics';
 import * as S from './styles';
 
-type Props = {
-    percenterOfMealsInOutDiet: number;
+type Props = MealListTypeProps;
+
+type StatisticsTypeProps = {
     maxStreakOfMealsInOutDiet: number;
     registredMeals: number;
     mealsInOfDiet: number;
     mealsOutOfDiet: number;
 }
 
-type RouteParams = {
-    meal: MealListTypeProps[];
-}
-
 const Statistics = () => {
-    const route = useRoute();
+    const [data, setData] = useState<Props[]>([]);
     const navigation = useNavigation();
-    const { meal } = route.params as RouteParams;
     const handleGoBack = () => navigation.goBack();
-
-    const statisticsOfMeals: Props = {
-        percenterOfMealsInOutDiet: 1,
-        maxStreakOfMealsInOutDiet: 2,
-        registredMeals: 3,
-        mealsInOfDiet: 4,
-        mealsOutOfDiet: 5 
+    
+    const statisticsOfMeals: StatisticsTypeProps = {
+        maxStreakOfMealsInOutDiet: 2
+        ,
+        registredMeals: data.map((item: Props) => {
+            return item.data.length
+        }).reduce((prev, curr) => prev + curr, 0)
+        ,
+        mealsInOfDiet: data.map((item: Props) => {
+            return item.data.map((item: MealTypeProps) => {
+                return item.isInDiet;
+            }).filter((item: IsInDietTypeProps) => item === true).length 
+        }).reduce((prev, curr) => prev + curr, 0)
+        ,
+        mealsOutOfDiet: data.map((item: Props) => {
+            return item.data.map((item: MealTypeProps) => {
+                return item.isInDiet;
+            }).filter((item: IsInDietTypeProps) => item === false).length 
+        }).reduce((prev, curr) => prev + curr, 0)
     }
+    
+    const percenteOfMealsInOfDiet: string = `${((statisticsOfMeals.mealsOutOfDiet * 100) / statisticsOfMeals.mealsInOfDiet).toFixed(2)}%`
+
+    const fetchStatistics: () => Promise<void> = async() => {
+        try{
+            const fetchData = await daysOfDietGetAll();
+            setData(fetchData);
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
+    useFocusEffect(useCallback(() => {
+        fetchStatistics();
+    }, []))
 
     return(
         <S.Container>
             <Highlight
-                title={statisticsOfMeals.percenterOfMealsInOutDiet}
+                title={percenteOfMealsInOfDiet}
                 type='PRIMARY'
                 icon='arrow-left'
                 sideOfIcon='LEFT'

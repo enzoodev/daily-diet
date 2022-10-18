@@ -25,7 +25,7 @@ const Home = () => {
     
     const handleScreens: ScreensTypeProps = {
         newMeal: () => navigation.navigate('newMeal'),
-        statistics: () => navigation.navigate('statistics', { data: list }),
+        statistics: () => navigation.navigate('statistics'),
         meal: (date, item) => navigation.navigate('meal', { meal: {date: date, data: [item]} })
     }
 
