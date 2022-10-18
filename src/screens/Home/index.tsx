@@ -47,7 +47,7 @@ const Home = () => {
         <S.Container>
             <Header />
             <Highlight
-                title={90.86}
+                title={`${90.86}`}
                 type='PRIMARY'
                 icon='arrow-top-right'
                 sideOfIcon='RIGHT'

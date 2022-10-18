@@ -2,7 +2,7 @@ import { ViewProps } from 'react-native'
 import * as S from './styles';
 
 type Props = ViewProps & S.HighlightTypeStyleProps & {
-    title: number;
+    title: string;
     icon: string;
     onFunction: () => void;
 }
