@@ -1,4 +1,4 @@
-import { AppError } from "@utils/AppError";
+import { AppError } from "@utils/AppError/index";
 import { MealListTypeProps } from "src/@types/meal";
 import mealAlreadyExists from "../../utils/authentication/mealAlreadyExists";
 import dateOfDietAlreadyExists from "@storage/utils/authentication/dateOfDietAlreadyExists";

@@ -22,40 +22,40 @@ const Statistics = () => {
     
     const statisticsOfMeals: StatisticsTypeProps = {
         maxStreakOfMealsInOutDiet: () => {
-            const listsOfMealsInOrOutOfDiet = data.map((item: Props) => {
+            const listsOfMealsInOrOutOfDiet: IsInDietTypeProps[][] = data.map((item: Props) => {
                 return item.data.map((item: MealTypeProps) => {
                     return item.isInDiet;
                 })
             })
-            const listOfMealsInOrOutOfDiet = listsOfMealsInOrOutOfDiet.reduce((prev, curr) => prev.concat(curr));
+            const listOfMealsInOrOutOfDiet: IsInDietTypeProps[] = listsOfMealsInOrOutOfDiet.reduce((prev, curr) => prev.concat(curr));
             return 10;
         }
         ,
         registredMeals: () => {
-            const listOfNumberOfMeals = data.map((item: Props) => {
+            const listOfNumberOfMeals: number[] = data.map((item: Props) => {
                 return item.data.length;
             })
-            const numberOfMeals = listOfNumberOfMeals.reduce((prev, curr) => prev + curr, 0);
+            const numberOfMeals: number = listOfNumberOfMeals.reduce((prev, curr) => prev + curr, 0);
             return numberOfMeals;
         }
         ,
         mealsInOfDiet: () => {
-            const listOfNumberOfMealsInDiet = data.map((item: Props) => {
+            const listOfNumberOfMealsInDiet: number[] = data.map((item: Props) => {
                 return item.data.map((item: MealTypeProps) => {
                     return item.isInDiet;
                 }).filter((item: IsInDietTypeProps) => item === true).length 
             })
-            const numberOfMealsInDiet = listOfNumberOfMealsInDiet.reduce((prev, curr) => prev + curr, 0);
+            const numberOfMealsInDiet: number = listOfNumberOfMealsInDiet.reduce((prev, curr) => prev + curr, 0);
             return numberOfMealsInDiet;
         }
         ,
         mealsOutOfDiet: () => {
-            const listOfNumberOfMealsOutDiet = data.map((item: Props) => {
+            const listOfNumberOfMealsOutDiet: number[] = data.map((item: Props) => {
                 return item.data.map((item: MealTypeProps) => {
                     return item.isInDiet;
                 }).filter((item: IsInDietTypeProps) => item === false).length 
             })
-            const numberOfMealsOutDiet = listOfNumberOfMealsOutDiet.reduce((prev, curr) => prev + curr, 0);
+            const numberOfMealsOutDiet: number = listOfNumberOfMealsOutDiet.reduce((prev, curr) => prev + curr, 0);
             return numberOfMealsOutDiet;  
         }
     }
@@ -66,7 +66,7 @@ const Statistics = () => {
         try{
             const fetchData = await daysOfDietGetAll();
             setData(fetchData);
-            console.log(statisticsOfMeals.maxStreakOfMealsInOutDiet);
+            console.log(statisticsOfMeals.maxStreakOfMealsInOutDiet());
         }
         catch(error){
             console.log(error);

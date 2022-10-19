@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native'
 import { MealListTypeProps } from 'src/@types/meal';
-import { AuthenticateDataTypeProps } from 'src/@types/authenticateData';
+import { AuthenticateDataTypeProps, AuthenticateDataObjectTypeProps } from 'src/@types/authenticateData';
 import { AppError } from '@utils/AppError';
+import validateDate from '@utils/validate/date';
 import createNewMeal from '@storage/meal/create';
 import editMeal from '@storage/meal/edit';
 import MiniHighlight from '@components/MiniHighlight';
@@ -41,24 +42,24 @@ const MealBody = ({ highlightTitle, buttonTitle, typeOfFuntion, mealForEdit }: P
     const [subtitleModal, setSubtitleModal] = useState<string>('');
     const navigation = useNavigation();
 
-    const authenticateData = () => {
-        const authenticate: AuthenticateDataTypeProps = {
-            date: meal.date.length === 10,
+    const authenticateData: AuthenticateDataTypeProps = (meal) => {
+        const authenticate: AuthenticateDataObjectTypeProps = {
+            date: validateDate(meal.date),
             hour: meal.data[0].hour.length === 5,
             title: meal.data[0].title.trim().length > 0,
             meal: meal.data[0].meal.trim().length > 0,
             isInDiet: meal.data[0].isInDiet !== undefined
         }
         const unauthenticatedData: boolean[] = Object.values(authenticate).filter((item) => item === false);
-        const authenticatedData: boolean = unauthenticatedData.length === 0;     
+        const authenticatedData: boolean = unauthenticatedData.length === 0;
         return authenticatedData;
     }
 
     const handleRegisterMeal = async() => {
         try{
-            if(authenticateData()) {
-                typeOfFuntion === 'ADD' ? await createNewMeal(meal) : await editMeal(meal, mealForEdit);
-                navigation.navigate('feedback', {isInDiet: meal.data[0].isInDiet});
+            if(authenticateData(meal)) {
+                /* typeOfFuntion === 'ADD' ? await createNewMeal(meal) : await editMeal(meal, mealForEdit);
+                navigation.navigate('feedback', {isInDiet: meal.data[0].isInDiet}); */
             }
             else{
                 setViewModal(true);
