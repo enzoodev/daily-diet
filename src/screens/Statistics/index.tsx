@@ -9,10 +9,10 @@ import * as S from './styles';
 type Props = MealListTypeProps;
 
 type StatisticsTypeProps = {
-    maxStreakOfMealsInOutDiet: number;
-    registredMeals: number;
-    mealsInOfDiet: number;
-    mealsOutOfDiet: number;
+    maxStreakOfMealsInOutDiet: () => number;
+    registredMeals: () => number;
+    mealsInOfDiet: () => number;
+    mealsOutOfDiet: () => number;
 }
 
 const Statistics = () => {
@@ -21,31 +21,52 @@ const Statistics = () => {
     const handleGoBack = () => navigation.goBack();
     
     const statisticsOfMeals: StatisticsTypeProps = {
-        maxStreakOfMealsInOutDiet: 2
+        maxStreakOfMealsInOutDiet: () => {
+            const listsOfMealsInOrOutOfDiet = data.map((item: Props) => {
+                return item.data.map((item: MealTypeProps) => {
+                    return item.isInDiet;
+                })
+            })
+            const listOfMealsInOrOutOfDiet = listsOfMealsInOrOutOfDiet.reduce((prev, curr) => prev.concat(curr));
+            return 10;
+        }
         ,
-        registredMeals: data.map((item: Props) => {
-            return item.data.length
-        }).reduce((prev, curr) => prev + curr, 0)
+        registredMeals: () => {
+            const listOfNumberOfMeals = data.map((item: Props) => {
+                return item.data.length;
+            })
+            const numberOfMeals = listOfNumberOfMeals.reduce((prev, curr) => prev + curr, 0);
+            return numberOfMeals;
+        }
         ,
-        mealsInOfDiet: data.map((item: Props) => {
-            return item.data.map((item: MealTypeProps) => {
-                return item.isInDiet;
-            }).filter((item: IsInDietTypeProps) => item === true).length 
-        }).reduce((prev, curr) => prev + curr, 0)
+        mealsInOfDiet: () => {
+            const listOfNumberOfMealsInDiet = data.map((item: Props) => {
+                return item.data.map((item: MealTypeProps) => {
+                    return item.isInDiet;
+                }).filter((item: IsInDietTypeProps) => item === true).length 
+            })
+            const numberOfMealsInDiet = listOfNumberOfMealsInDiet.reduce((prev, curr) => prev + curr, 0);
+            return numberOfMealsInDiet;
+        }
         ,
-        mealsOutOfDiet: data.map((item: Props) => {
-            return item.data.map((item: MealTypeProps) => {
-                return item.isInDiet;
-            }).filter((item: IsInDietTypeProps) => item === false).length 
-        }).reduce((prev, curr) => prev + curr, 0)
+        mealsOutOfDiet: () => {
+            const listOfNumberOfMealsOutDiet = data.map((item: Props) => {
+                return item.data.map((item: MealTypeProps) => {
+                    return item.isInDiet;
+                }).filter((item: IsInDietTypeProps) => item === false).length 
+            })
+            const numberOfMealsOutDiet = listOfNumberOfMealsOutDiet.reduce((prev, curr) => prev + curr, 0);
+            return numberOfMealsOutDiet;  
+        }
     }
     
-    const percenteOfMealsInOfDiet: string = `${((statisticsOfMeals.mealsOutOfDiet * 100) / statisticsOfMeals.mealsInOfDiet).toFixed(2)}%`
+    const percenteOfMealsInOfDiet: string = `${((statisticsOfMeals.mealsOutOfDiet() * 100) / statisticsOfMeals.mealsInOfDiet()).toFixed(2)}%`
 
     const fetchStatistics: () => Promise<void> = async() => {
         try{
             const fetchData = await daysOfDietGetAll();
             setData(fetchData);
+            console.log(statisticsOfMeals.maxStreakOfMealsInOutDiet);
         }
         catch(error){
             console.log(error);
@@ -71,26 +92,26 @@ const Statistics = () => {
                     Estatísticas gerais   
                  </S.Title>
                 <HighLightStatistics
-                    title={statisticsOfMeals.maxStreakOfMealsInOutDiet}
+                    title={statisticsOfMeals.maxStreakOfMealsInOutDiet()}
                     subtitle='melhor sequência de pratos dentro da dieta'
                     type='DEFAULT'
                     isComplete={true}
                 />
                 <HighLightStatistics
-                    title={statisticsOfMeals.registredMeals}
+                    title={statisticsOfMeals.registredMeals()}
                     subtitle='refeições registradas'
                     type='DEFAULT'
                     isComplete={true}
                 />
                 <S.MiniContainer>
                     <HighLightStatistics
-                        title={statisticsOfMeals.mealsInOfDiet}
+                        title={statisticsOfMeals.mealsInOfDiet()}
                         subtitle='refeições dentro da dieta'
                         type='PRIMARY'
                         isComplete={false}
                     />
                     <HighLightStatistics
-                        title={statisticsOfMeals.mealsOutOfDiet}
+                        title={statisticsOfMeals.mealsOutOfDiet()}
                         subtitle='refeições fora da dieta'
                         type='SECONDARY'
                         isComplete={false}
