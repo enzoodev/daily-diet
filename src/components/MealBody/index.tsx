@@ -4,6 +4,7 @@ import { MealListTypeProps } from 'src/@types/meal';
 import { AuthenticateDataTypeProps, AuthenticateDataObjectTypeProps } from 'src/@types/authenticateData';
 import { AppError } from '@utils/AppError';
 import validateDate from '@utils/validate/date';
+import validateHour from '@utils/validate/hour';
 import createNewMeal from '@storage/meal/create';
 import editMeal from '@storage/meal/edit';
 import MiniHighlight from '@components/MiniHighlight';
@@ -45,7 +46,7 @@ const MealBody = ({ highlightTitle, buttonTitle, typeOfFuntion, mealForEdit }: P
     const authenticateData: AuthenticateDataTypeProps = (meal) => {
         const authenticate: AuthenticateDataObjectTypeProps = {
             date: validateDate(meal.date),
-            hour: meal.data[0].hour.length === 5,
+            hour: validateHour(meal.data[0].hour),
             title: meal.data[0].title.trim().length > 0,
             meal: meal.data[0].meal.trim().length > 0,
             isInDiet: meal.data[0].isInDiet !== undefined
@@ -58,8 +59,8 @@ const MealBody = ({ highlightTitle, buttonTitle, typeOfFuntion, mealForEdit }: P
     const handleRegisterMeal = async() => {
         try{
             if(authenticateData(meal)) {
-                /* typeOfFuntion === 'ADD' ? await createNewMeal(meal) : await editMeal(meal, mealForEdit);
-                navigation.navigate('feedback', {isInDiet: meal.data[0].isInDiet}); */
+                typeOfFuntion === 'ADD' ? await createNewMeal(meal) : await editMeal(meal, mealForEdit);
+                navigation.navigate('feedback', {isInDiet: meal.data[0].isInDiet});
             }
             else{
                 setViewModal(true);

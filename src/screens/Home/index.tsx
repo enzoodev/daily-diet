@@ -10,6 +10,7 @@ import ListItem from '@components/ListItem';
 import ListHeader from '@components/ListHeader';
 import ListEmpty from '@components/ListEmpty';
 import * as S from './styles';
+import percenteOfMealsInOfDiet from '@utils/statistics/percenteOfMealsInOfDiet';
 
 type Props = MealListTypeProps;
 
@@ -22,6 +23,8 @@ type ScreensTypeProps = {
 const Home = () => {
     const [list, setList] = useState<Props[]>([]);
     const navigation = useNavigation();
+
+    const statisticOfPercentOfMealsInDiet = percenteOfMealsInOfDiet(list);
     
     const handleScreens: ScreensTypeProps = {
         newMeal: () => navigation.navigate('newMeal'),
@@ -47,7 +50,7 @@ const Home = () => {
         <S.Container>
             <Header />
             <Highlight
-                title={`${90.86}`}
+                title={statisticOfPercentOfMealsInDiet}
                 type='PRIMARY'
                 icon='arrow-top-right'
                 sideOfIcon='RIGHT'
