@@ -21,7 +21,7 @@ const Container = styled.TouchableOpacity`
 const Icon = styled.View<Props>`
     width: 8px;
     height: 8px;
-    margin-right: 4px;
+    margin-right: 6px;
     border-radius: 50%;
     background-color: ${({ theme, isInDiet }) => isInDiet ?
     theme.COLORS.PRODUCT.GREEN_DARK : theme.COLORS.PRODUCT.RED_DARK};

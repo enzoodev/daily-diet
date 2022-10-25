@@ -5,6 +5,7 @@ import dateOfDietAlreadyExists from "@storage/utils/authentication/dateOfDietAlr
 import daysOfDietGetAll from "@storage/utils/dayOfDietGetAll";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DAYSOFDIET_COLLECTION } from "@storage/config";
+import sort from "@storage/utils/sort";
 
 type Props = MealListTypeProps;
 
@@ -23,8 +24,9 @@ const createNewMeal = async(newMeal: Props) => {
         }
         else storedMeals.push(newMeal);
 
-        const storage: string = JSON.stringify(storedMeals);
-        await AsyncStorage.setItem(DAYSOFDIET_COLLECTION, storage);
+        const sortedData: MealListTypeProps[] = sort(storedMeals);
+        const storage: string = JSON.stringify(sortedData);
+        /* await AsyncStorage.setItem(DAYSOFDIET_COLLECTION, storage); */
     }
     catch(error){
         throw error;

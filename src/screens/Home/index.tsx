@@ -3,6 +3,7 @@ import { SectionList } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { MealListTypeProps, MealTypeProps } from 'src/@types/meal';
 import daysOfDietGetAll from '@storage/utils/dayOfDietGetAll';
+import percenteOfMealsInOfDiet from '@utils/statistics/percenteOfMealsInOfDiet';
 import Header from '@components/Header';
 import Highlight from '@components/Highlight';
 import Button from '@components/Button';
@@ -10,7 +11,6 @@ import ListItem from '@components/ListItem';
 import ListHeader from '@components/ListHeader';
 import ListEmpty from '@components/ListEmpty';
 import * as S from './styles';
-import percenteOfMealsInOfDiet from '@utils/statistics/percenteOfMealsInOfDiet';
 
 type Props = MealListTypeProps;
 
@@ -20,7 +20,7 @@ type ScreensTypeProps = {
     meal: (date: string, item: MealTypeProps) => void;
 }
 
-const Home = () => {
+const Home: React.FC = () => {
     const [list, setList] = useState<Props[]>([]);
     const navigation = useNavigation();
 
