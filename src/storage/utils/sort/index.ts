@@ -3,30 +3,26 @@ import { MealListTypeProps } from "src/@types/meal";
 type Props = (data: MealListTypeProps[]) => MealListTypeProps[];
 
 const sort: Props = (data) => {
-    const generateDate = data.map((item: any) => {
-        const day = item.date.substring(0,2);
-        const month = item.date.substring(3,5);
-        const year = item.date.substring(6,10);
+    const generateDate: any[] = data.map((item: any) => {
+        const day: string = item.date.slice(0,2);
+        const month: string = item.date.slice(3,5);
+        const year: string = item.date.slice(6,10);
         item.date = new Date(`${year}-${month}-${day}`);
         return item;
     })
 
-    const sortDates = generateDate.sort((a, b) => {
-        return b.date - a.date;
+    const sortDates: any[] = generateDate.sort((a, b) => b.date - a.date);
+
+    const returnDateToString: MealListTypeProps[] = sortDates.map((item: any) => {
+        const dateToString: string = item.date.toISOString().slice(0,10);
+        const day: string = dateToString.slice(8, 10);
+        const month: string = dateToString.slice(5, 7);
+        const year: string = dateToString.slice(2, 4);
+        item.date = `${day}.${month}.${year}`;
+        return item; 
     })
 
-    console.log(generateDate);
-    console.log(sortDates);
-
-/*  var parts ='2014-04-03'.split('-');
-    Please pay attention to the month (parts[1]); JavaScript counts months from 0:
-    January - 0, February - 1, etc.
-    var mydate = new Date(parts[0], parts[1] - 1, parts[2]); 
-    console.log(mydate.toDateString()); */
-
-    const sortedData: MealListTypeProps[] = data;
-
-    return sortedData;
+    return returnDateToString;
 }
 
 export default sort;

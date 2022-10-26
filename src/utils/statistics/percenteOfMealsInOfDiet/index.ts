@@ -5,6 +5,9 @@ import registredMeals from "../registredMeals";
 type Props = (data: MealListTypeProps[]) => string;
 
 const percenteOfMealsInOfDiet: Props = (data) => {
+    if(!data.length)
+        return '0%';
+        
     const registredAllMeals: number = registredMeals(data);
     const mealsInOfDiet: number = mealsOfDiet(data, true);
 

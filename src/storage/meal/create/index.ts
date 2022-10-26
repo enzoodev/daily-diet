@@ -14,7 +14,8 @@ const createNewMeal = async(newMeal: Props) => {
         let storedMeals = await daysOfDietGetAll();
 
         const isMealAlreadyExists: boolean = await mealAlreadyExists(newMeal);
-        if(isMealAlreadyExists) throw new AppError('Já existe um grupo cadastrado com esse nome');
+        if(isMealAlreadyExists) 
+            throw new AppError('Já existe um grupo cadastrado com esse nome');
 
         const isDateOfDietAlreadyExists = await dateOfDietAlreadyExists(newMeal);
 
@@ -22,11 +23,12 @@ const createNewMeal = async(newMeal: Props) => {
             const index: number = storedMeals.findIndex((item: MealListTypeProps) => item.date === newMeal.date);
             storedMeals[index].data.push(newMeal.data[0]);
         }
-        else storedMeals.push(newMeal);
+        else 
+            storedMeals.push(newMeal);
 
         const sortedData: MealListTypeProps[] = sort(storedMeals);
         const storage: string = JSON.stringify(sortedData);
-        /* await AsyncStorage.setItem(DAYSOFDIET_COLLECTION, storage); */
+        await AsyncStorage.setItem(DAYSOFDIET_COLLECTION, storage);
     }
     catch(error){
         throw error;

@@ -11,6 +11,7 @@ import ListItem from '@components/ListItem';
 import ListHeader from '@components/ListHeader';
 import ListEmpty from '@components/ListEmpty';
 import * as S from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Props = MealListTypeProps;
 
@@ -24,7 +25,7 @@ const Home: React.FC = () => {
     const [list, setList] = useState<Props[]>([]);
     const navigation = useNavigation();
 
-    const statisticOfPercentOfMealsInDiet = percenteOfMealsInOfDiet(list);
+    const statisticOfPercentOfMealsInDiet: string = percenteOfMealsInOfDiet(list);
     
     const handleScreens: ScreensTypeProps = {
         newMeal: () => navigation.navigate('newMeal'),
@@ -44,6 +45,7 @@ const Home: React.FC = () => {
 
     useFocusEffect(useCallback(() => {
         fetchDaysOfDiet();
+/*         AsyncStorage.clear(); */
     }, []))
 
     return(
