@@ -40,7 +40,7 @@ const Circle = styled.View<Props>`
     right: 14px;
     border-radius: 50%;
     background-color: ${({ theme, isActive }) => isActive ?
-    theme.COLORS.PRODUCT.GREEN_MID : theme.COLORS.PRODUCT.RED_MID};
+    theme.COLORS.PRODUCT.PRIMARY_MID : theme.COLORS.PRODUCT.SECONDARY_MID};
 `
 
 export { Container, Hours, Title, Circle };

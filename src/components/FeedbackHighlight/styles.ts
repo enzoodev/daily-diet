@@ -13,7 +13,7 @@ const Title = styled.Text<Props>`
     ${({ theme, isInDiet }) => css`
         font-family: ${theme.FONTS.FAMILY.BOLD};
         font-size: ${theme.FONTS.SIZE.LG}px;
-        color: ${isInDiet ? theme.COLORS.PRODUCT.GREEN_DARK : theme.COLORS.PRODUCT.RED_DARK};
+        color: ${isInDiet ? theme.COLORS.PRODUCT.PRIMARY_DARK : theme.COLORS.PRODUCT.SECONDARY_DARK};
     `};
     text-align: center;
 `

@@ -15,7 +15,7 @@ const Container = styled.View<Props>`
     align-items: center;
     ${({ theme, type }) => css`
         background-color: ${type === 'PRIMARY' ?
-        theme.COLORS.PRODUCT.GREEN_LIGHT : theme.COLORS.PRODUCT.RED_LIGHT};
+        theme.COLORS.PRODUCT.PRIMARY_LIGHT : theme.COLORS.PRODUCT.SECONDARY_LIGHT};
     `}
 `
 
@@ -37,7 +37,7 @@ const Subtitle = styled.Text`
 
 const Icon = styled(MaterialCommunityIcons).attrs<Props>(({ theme, type }) => ({
     size: 24,
-    color: type === 'PRIMARY' ? theme.COLORS.PRODUCT.GREEN_DARK : theme.COLORS.PRODUCT.RED_DARK
+    color: type === 'PRIMARY' ? theme.COLORS.PRODUCT.PRIMARY_DARK : theme.COLORS.PRODUCT.SECONDARY_DARK
 }))<Props>`
     position: absolute;
     ${({ sideOfIcon }) => sideOfIcon === 'LEFT' ?

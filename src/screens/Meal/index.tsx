@@ -49,7 +49,7 @@ const Meal = () => {
         <S.Container>
             <MiniHighlight
                 title='Refeição'
-                type='PRIMARY'
+                type={meal.data[0].isInDiet ? 'PRIMARY' : 'SECONDARY'}
             />
             <S.Content>
                 <S.SubContent>

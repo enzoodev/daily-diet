@@ -1,7 +1,7 @@
 export default {
     COLORS: {
         BASE: {
-            BLACK: '#000000',
+            DARK: '#000000',
             GRAY_1: '#1B1D1E',
             GRAY_2: '#333638',
             GRAY_3: '#5C6265',
@@ -9,15 +9,15 @@ export default {
             GRAY_5: '#DDDEDF',
             GRAY_6: '#EFF0F0',
             GRAY_7: '#FAFAFA',
-            WHITE: '#FFFFFF'
+            LIGHT: '#FFFFFF'
         },
         PRODUCT: {
-            GREEN_DARK: '#639339',
-            GREEN_MID: '#CBE4B4',
-            GREEN_LIGHT: '#E5F0DB',
-            RED_DARK: '#BF3B44',
-            RED_MID: '#F3BABD',
-            RED_LIGHT: '#F4E6E7'
+            PRIMARY_DARK: '#639339',
+            PRIMARY_MID: '#CBE4B4',
+            PRIMARY_LIGHT: '#E5F0DB',
+            SECONDARY_DARK: '#BF3B44',
+            SECONDARY_MID: '#F3BABD',
+            SECONDARY_LIGHT: '#F4E6E7'
         }
     },
     FONTS: {

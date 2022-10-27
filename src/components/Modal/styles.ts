@@ -16,7 +16,7 @@ const Background = styled.View`
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: ${({ theme }) => theme.COLORS.BASE.BLACK};
+    background-color: ${({ theme }) => theme.COLORS.BASE.DARK};
 `
 
 const Container = styled.View`
@@ -89,7 +89,7 @@ const ButtonTitle = styled.Text<Props>`
         font-family: ${theme.FONTS.FAMILY.BOLD};
         font-size: ${theme.FONTS.SIZE.MD}px;
         color: ${type === 'DARK' || typeTwo === 'DARK' ?
-        theme.COLORS.BASE.WHITE : theme.COLORS.BASE.GRAY_1};
+        theme.COLORS.BASE.LIGHT : theme.COLORS.BASE.GRAY_1};
     `};
 `
 

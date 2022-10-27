@@ -18,7 +18,7 @@ const Container = styled.View<Props>`
         height: ${isComplete ? 17 : 21}%;
         background-color: ${type === 'DEFAULT' ?
         theme.COLORS.BASE.GRAY_5 : type === 'PRIMARY' ?
-        theme.COLORS.PRODUCT.GREEN_LIGHT : theme.COLORS.PRODUCT.RED_LIGHT};
+        theme.COLORS.PRODUCT.PRIMARY_LIGHT : theme.COLORS.PRODUCT.SECONDARY_LIGHT};
     `}
 `
 

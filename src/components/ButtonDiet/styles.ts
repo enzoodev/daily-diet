@@ -16,8 +16,8 @@ const Container = styled.TouchableOpacity<Props>`
     align-items: center;
     justify-content: center;
     ${({ theme, type, isActive }) => isActive ? css`
-        background-color: ${type === 'PRIMARY' ? theme.COLORS.PRODUCT.GREEN_LIGHT : theme.COLORS.PRODUCT.RED_LIGHT};
-        border: 1px solid ${type === 'PRIMARY' ? theme.COLORS.PRODUCT.GREEN_DARK : theme.COLORS.PRODUCT.RED_DARK};
+        background-color: ${type === 'PRIMARY' ? theme.COLORS.PRODUCT.PRIMARY_LIGHT : theme.COLORS.PRODUCT.SECONDARY_LIGHT};
+        border: 1px solid ${type === 'PRIMARY' ? theme.COLORS.PRODUCT.PRIMARY_DARK : theme.COLORS.PRODUCT.SECONDARY_DARK};
     ` : css`
         background-color: ${theme.COLORS.BASE.GRAY_6};
     `
@@ -38,7 +38,7 @@ const Icon = styled.View<Props>`
     margin-right: 8px;
     border-radius: 50%;
     background-color: ${({ theme, type }) => type === 'PRIMARY' ?
-        theme.COLORS.PRODUCT.GREEN_DARK : theme.COLORS.PRODUCT.RED_DARK
+        theme.COLORS.PRODUCT.PRIMARY_DARK : theme.COLORS.PRODUCT.SECONDARY_DARK
     };
 `
 

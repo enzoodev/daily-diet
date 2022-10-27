@@ -25,7 +25,7 @@ const Home: React.FC = () => {
     const [list, setList] = useState<Props[]>([]);
     const navigation = useNavigation();
 
-    const statisticOfPercentOfMealsInDiet: string = percenteOfMealsInOfDiet(list);
+    const statisticOfPercentOfMealsInDiet: number = percenteOfMealsInOfDiet(list);
     
     const handleScreens: ScreensTypeProps = {
         newMeal: () => navigation.navigate('newMeal'),
@@ -45,15 +45,15 @@ const Home: React.FC = () => {
 
     useFocusEffect(useCallback(() => {
         fetchDaysOfDiet();
-/*         AsyncStorage.clear(); */
+        AsyncStorage.clear();
     }, []))
 
     return(
         <S.Container>
             <Header />
             <Highlight
-                title={statisticOfPercentOfMealsInDiet}
-                type='PRIMARY'
+                title={statisticOfPercentOfMealsInDiet > 0 ? `${statisticOfPercentOfMealsInDiet.toFixed(2)}` : `0%`}
+                type={statisticOfPercentOfMealsInDiet >= 50 ? 'PRIMARY' : 'SECONDARY'}
                 icon='arrow-top-right'
                 sideOfIcon='RIGHT'
                 style={{ height: 102 }}

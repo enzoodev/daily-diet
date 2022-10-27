@@ -2,7 +2,7 @@ import { MealListTypeProps } from "src/@types/meal";
 import mealsOfDiet from "../mealsOfDiet";
 import registredMeals from "../registredMeals";
 
-type Props = (data: MealListTypeProps[]) => string;
+type Props = (data: MealListTypeProps[]) => any;
 
 const percenteOfMealsInOfDiet: Props = (data) => {
     if(!data.length)
@@ -11,8 +11,7 @@ const percenteOfMealsInOfDiet: Props = (data) => {
     const registredAllMeals: number = registredMeals(data);
     const mealsInOfDiet: number = mealsOfDiet(data, true);
 
-    const calcOfPercent: string = ((mealsInOfDiet * 100) / registredAllMeals).toFixed(2);
-    const percent: string = `${calcOfPercent}%`;
+    const percent: number = ((mealsInOfDiet * 100) / registredAllMeals);
 
     return percent;
 }

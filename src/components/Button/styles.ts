@@ -25,19 +25,19 @@ const Title = styled.Text<Props>`
     ${({ theme, type }) => css`
         font-family: ${theme.FONTS.FAMILY.BOLD};
         font-size: ${theme.FONTS.SIZE.MD}px;
-        color: ${type === 'DARK' ? theme.COLORS.BASE.WHITE : theme.COLORS.BASE.GRAY_1};
+        color: ${type === 'DARK' ? theme.COLORS.BASE.LIGHT : theme.COLORS.BASE.GRAY_1};
     `};
     margin-left: 6px;
 `
 
 const Icon = styled(MaterialIcons).attrs<Props>(({ theme, type }) => ({
     size: 18,
-    color: type === 'DARK' ? theme.COLORS.BASE.WHITE : theme.COLORS.BASE.GRAY_1
+    color: type === 'DARK' ? theme.COLORS.BASE.LIGHT : theme.COLORS.BASE.GRAY_1
 }))``;
 
 const IconCommunity = styled(MaterialCommunityIcons).attrs<Props>(({ theme, type }) => ({
     size: 18,
-    color: type === 'DARK' ? theme.COLORS.BASE.WHITE : theme.COLORS.BASE.GRAY_1
+    color: type === 'DARK' ? theme.COLORS.BASE.LIGHT : theme.COLORS.BASE.GRAY_1
 }))``;
 
 export { ButtonTypeStyleProps, Container, Title, Icon, IconCommunity };

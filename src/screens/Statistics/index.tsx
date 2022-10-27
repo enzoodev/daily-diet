@@ -13,7 +13,7 @@ import mealsOfDiet from '@utils/statistics/mealsOfDiet';
 type Props = MealListTypeProps;
 
 type StatisticsTypeProps = {
-    percenteOfMealsInOfDiet: string;
+    percenteOfMealsInOfDiet: number;
     maxStreakOfMealsInOutDiet: number;
     registredMeals: number;
     mealsInOfDiet: number;
@@ -50,7 +50,7 @@ const Statistics = () => {
     return(
         <S.Container>
             <Highlight
-                title={statisticsOfMeals.percenteOfMealsInOfDiet}
+                title={statisticsOfMeals.percenteOfMealsInOfDiet > 0 ? `${statisticsOfMeals.percenteOfMealsInOfDiet.toFixed(2)}` : `0%`}
                 type='PRIMARY'
                 icon='arrow-left'
                 sideOfIcon='LEFT'
