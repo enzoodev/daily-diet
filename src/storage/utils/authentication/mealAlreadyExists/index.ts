@@ -16,12 +16,14 @@ const mealAlreadyExists: Props = async(meal) => {
         if(isDateOfDietAlreadyExists){
             const isMealIsAUniqueMealOfTheDay: boolean = await mealIsAUniqueMealOfTheDay(meal);
 
-            if(isMealIsAUniqueMealOfTheDay) isMealAlreadyExists = JSON.stringify(storedMeals).includes(JSON.stringify(meal));
-            else isMealAlreadyExists =
-            storedMeals[index].date === meal.date && 
-            JSON.stringify(storedMeals[index].data).includes(JSON.stringify(meal.data[0]));
+            if(isMealIsAUniqueMealOfTheDay) 
+                isMealAlreadyExists = JSON.stringify(storedMeals).includes(JSON.stringify(meal));
+            else 
+                isMealAlreadyExists = storedMeals[index].date === meal.date && 
+                JSON.stringify(storedMeals[index].data).includes(JSON.stringify(meal.data[0]));
         }
-        else isMealAlreadyExists = false;
+        else 
+            isMealAlreadyExists = false;
 
         return isMealAlreadyExists;
     }

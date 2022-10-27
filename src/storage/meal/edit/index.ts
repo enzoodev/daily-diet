@@ -8,13 +8,13 @@ type Props = (meal: MealListTypeProps, mealForEdit: any) => Promise<void>;
 
 const editMeal: Props = async(meal, mealForEdit) => {
     try{
-        if(meal !== mealForEdit) {
-            const isMealAlreadyExists: boolean = await mealAlreadyExists(meal);
-            if(isMealAlreadyExists) throw new AppError('Já existe um grupo cadastrado com esse nome');
+        const isMealAlreadyExists: boolean = await mealAlreadyExists(meal);
+        
+        if(isMealAlreadyExists)
+            throw new AppError('Já existe uma refeição como essa cadastrada');
 
-            await deleteMeal(mealForEdit);
-            await createNewMeal(meal);
-        }
+        await deleteMeal(mealForEdit);
+        await createNewMeal(meal);
     }
     catch(error){
         throw error;

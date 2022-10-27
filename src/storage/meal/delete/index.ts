@@ -19,7 +19,9 @@ const deleteMeal: Props = async(meal) => {
             })
         }
         else{
-            storedMeals[indexOfTheExcludedMeal].data = storedMeals[indexOfTheExcludedMeal].data.filter((item: MealTypeProps) => {
+            storedMeals[indexOfTheExcludedMeal].data =
+            storedMeals[indexOfTheExcludedMeal].data
+            .filter((item: MealTypeProps) => {
                 return JSON.stringify(item) !== JSON.stringify(meal.data[0]);
             })    
         }
