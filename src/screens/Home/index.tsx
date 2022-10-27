@@ -45,7 +45,6 @@ const Home: React.FC = () => {
 
     useFocusEffect(useCallback(() => {
         fetchDaysOfDiet();
-        AsyncStorage.clear();
     }, []))
 
     return(
