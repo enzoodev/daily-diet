@@ -1,4 +1,4 @@
-<h1 style="text-align: center; font-weight: bold;">TodoList</h1>
+<h1 style="text-align: center; font-weight: bold;">Daily Diet</h1>
 
 ## Demo 📸
 
