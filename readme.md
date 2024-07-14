@@ -8,35 +8,35 @@
 </div>
 
 ---
-## Sobre o Projeto
+## About the Project
 
-O aplicativo Daily-Diet é um app de monitoramento de dieta ideal para ser no seu usado no dia a dia, nele você pode registrar suas refeições diariamente e classificá-las da forma que quiser que o app vai armazená-las no armazenamento local do seu dispositivo, portanto só seram excluidas caso você desejar, outro ponto intessante é que o app tem uma tela exclusiva para as principais estatísticas das suas refeições, além das outras 5 páginas que compõe toda a aplcação
+The Daily-Diet app is an ideal diet monitoring app for daily use. In it, you can record your meals daily and classify them as you wish. The app will store them in your device's local storage, so they will only be deleted if you choose to. Another interesting point is that the app has an exclusive screen for the main statistics of your meals, in addition to the other 5 pages that make up the entire application.
 
-### 🛠 Tecnologias
+### 🛠 Technologies
 
 - [React Native](https://reactnative.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [React](https://pt-br.reactjs.org/)
-- [Expo](https://expo.io/)
+- [React](https://reactjs.org/)
+- [Expo](https://expo.dev/)
 - [Styled-components](https://styled-components.com/)
 - [React Navigation](https://reactnavigation.org/)
 - [Async Storage](https://react-native-async-storage.github.io/async-storage/)
 - [Expo-Vector-Icons](https://icons.expo.fyi/)
 ---
 
-### 🎲 Rodando o Mobile
+### 🎲 Running the Mobile App
 
 ```bash
-# Clone este repositório
+# Clone this repository
 $ git clone https://github.com/Ninodev30/daily-diet
-# Acesse a pasta do projeto no terminal/cmd
+# Navigate to the project folder in the terminal/cmd
 $ cd daily-diet
-# Instale as dependências
+# Install the dependencies
 $ yarn
-# ou
+# or
 $ npm install
-# Execute a aplicação em modo de desenvolvimento
+# Run the application in development mode
 $ yarn start
-# ou
+# or
 $ npx expo start
-```
+
